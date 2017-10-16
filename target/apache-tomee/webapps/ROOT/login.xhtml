@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Staiter</title>
+	<ui:include src="style.xhtml"/>
+  	<h:outputScript library="js" name="plugins/jquery-validation/jquery.validate.min.js" />
+  	<h:outputScript library="js" name="pages/base_pages_login.js" />
+</h:head>
+<h:body>
+	<div id="layout">
+		<div id="content">
+			<ui:insert name="content">
+		        <div class="content overflow-hidden">
+		            <div class="row">
+		                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+		                    <div class="block block-themed animated fadeIn">
+		                        <div class="block-header bg-primary">
+		                            <ul class="block-options">
+		                                <li>
+		                                    <h:outputLink value="register.xhtml">Registrarme</h:outputLink>
+		                                </li>
+		                                <li>
+		                                	<h:outputLink value="register.xhtml"><i class="si si-plus"></i></h:outputLink>		                                   
+		                                </li>
+		                            </ul>
+		                            <h3 class="block-title">Ingreso</h3>
+		                        </div>
+		                        <div class="block-content block-content-full block-content-narrow">
+		                            <h1 class="h2 font-w600 push-30-t push-5">Staiter</h1>
+		                            <p>Tu Twitter Davincero.</p>
+		
+		                            <h:form styleClass="js-validation-login form-horizontal push-30-t push-50" action="base_pages_dashboard.html" method="post">
+		                                <div class="form-group">
+		                                    <div class="col-xs-12">
+		                                        <div class="form-material form-material-primary floating">
+		                                            <h:inputText styleClass="form-control" type="email" id="login-username" name="login-username" value="#{userMb.userName}"/>
+		                                            <label for="login-username">E-mail</label>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group">
+		                                    <div class="col-xs-12">
+		                                        <div class="form-material form-material-primary floating">
+		                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="login-password" name="login-password" value="#{userMb.password}"/>
+		                                            <label for="login-password">Password</label>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group">
+		                                    <div class="col-xs-12 col-sm-6 col-md-4">                                        
+		                                        <h:commandLink action="#{userMb.login()}" styleClass="btn btn-block btn-primary">
+		                                        	<i class="si si-login pull-right"></i>Entrar
+		                                        </h:commandLink>
+		                                    </div>
+		                                </div>
+		                            </h:form>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+			</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>
