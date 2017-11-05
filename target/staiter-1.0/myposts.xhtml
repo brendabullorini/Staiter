@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="template.xhtml">
+	<ui:define name="title">
+		<h:outputText value="Mis posts" />
+	</ui:define>		
+	<ui:define name="content">
+	<div class="block">
+		<div class="block-header">			
+			<h3 class="block-title"><h:outputText value="Mis posts" /></h3>
+		</div>	
+		<div class="block-content">
+			<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center" style="width: 15%;">Fecha</th>
+							<th class="text-center" style="width: 15%;">Usuario</th>
+							<th>Contenido</th>	
+							<th class="text-center" style="width: 100px;">Acciones</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="p" value="#{postMb.postsByUser}">
+							<tr>								
+								<td class="text-center">#{p.date}</td>
+								<td class="text-center">
+									<span class="label label-info">#{p.user.userName}</span>								
+								</td>
+								<td class="font-w600">#{p.content}</td>
+								<td class="text-center">
+                                	<div class="btn-group">
+                                    	<button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-xs btn-default" type="button" data-toggle="tooltip" title="Eliminar"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+			</table>	
+		</div>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>

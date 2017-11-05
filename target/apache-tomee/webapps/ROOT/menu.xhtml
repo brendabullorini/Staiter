@@ -17,14 +17,17 @@
 	                    <h:outputLink value="index.xhtml" class="active">Home</h:outputLink>   
 	                </li>
 	                <li>                          
-	                    <h:outputLink value="login.xhtml">Ingresar</h:outputLink>                         
+	                    <h:outputLink value="login.xhtml" rendered="#{! loginMb.logged}">Ingresar</h:outputLink>                         
+	                </li>
+	                <li>                          
+	                    <h:outputLink value="myposts.xhtml" rendered="#{loginMb.logged}">Mis posts</h:outputLink>                         
 	                </li>
 	                <li>
-	                    <h:outputLink value="register.xhtml">Registrarme</h:outputLink>   	                    
+	                    <h:outputLink value="register.xhtml" rendered="#{! loginMb.logged}">Registrarme</h:outputLink>   	                    
 	                </li>
 	                <li>
 	                	<h:form>
-	                		<h:commandLink action="#{userMb.logout()}">Salir</h:commandLink>
+	                		<h:commandLink action="#{loginMb.logout()}" rendered="#{loginMb.logged}">Salir</h:commandLink>
 	                	</h:form>						
 	                </li>
 	            </ul>                    

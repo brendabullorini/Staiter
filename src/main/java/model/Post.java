@@ -2,9 +2,20 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Post {
 	
-	private int ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)	
+	private int ID;   
+    
+    @ManyToOne
 	private User user;
 	private Date date;
 	private String content;

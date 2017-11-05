@@ -1,7 +1,7 @@
+view\LoginMb.class
 controller\PostController.class
+view\RegisterMb.class
 controller\UserController.class
 view\PostMb.class
-model\DB.class
-view\UserMb.class
 model\User.class
 model\Post.class

@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">                                            
-                                            <h:inputText styleClass="form-control" type="text" id="register-username" name="register-username" value="#{userMb.userName}"/>
+                                            <h:inputText styleClass="form-control" type="text" id="register-username" name="register-username" value="#{registerMb.userName}"/>
                                             <label for="register-username">Usuario</label>
                                         </div>
                                     </div>
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">
-                                            <h:inputText styleClass="form-control" type="email" id="register-email" name="register-email" value="#{userMb.email}"/>                                          
+                                            <h:inputText styleClass="form-control" type="email" id="register-email" name="register-email" value="#{registerMb.email}"/>                                          
                                             <label for="register-email">E-mail</label>
                                         </div>
                                     </div>
@@ -45,14 +45,14 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">                                            
-                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="register-password" name="register-password" value="#{userMb.password}"/>
+                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="register-password" name="register-password" value="#{registerMb.password}"/>
                                             <label for="register-password">Password</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6 col-md-5">                                        
-                                        <h:commandLink action="#{userMb.add()}" styleClass="btn btn-block btn-success"><i class="fa fa-plus pull-right"></i>Registrarme</h:commandLink>
+                                        <h:commandLink action="#{registerMb.add()}" styleClass="btn btn-block btn-success"><i class="fa fa-plus pull-right"></i>Registrarme</h:commandLink>
                                     </div>
                                 </div>
                             </h:form>

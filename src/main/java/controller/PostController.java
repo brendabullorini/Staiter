@@ -1,52 +1,40 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-import model.DB;
 import model.Post;
-import model.User;
 
 @Stateless
 public class PostController {
 	
-	@Inject
-	DB db;
+    @PersistenceContext
+    private EntityManager entityManager;	
 	
 	public List<Post> getAll(){
-		return db.getPosts();
+		
+    	String hql = "Select p from Post p";
+		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
+        return q.getResultList();
 	}
 	
-	public List<Post> getByUser(String username){
+	public List<Post> getByUser(int ID){
 		
-		List<Post> posts = new ArrayList<>();
-		
-		for (Post p : db.getPosts()) {
-			if(p.getUser().getUserName().equals(username))				
-				posts.add(p);
-		}
-		
-		return posts;
+		System.out.println("ID en controller: " + String.valueOf(ID));
+    	String hql = "Select p from Post p where p.user.ID = :user";
+		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
+		q.setParameter("user", ID);
+        return q.getResultList();
 	}	
 	
 	public void createPost(Post p){
-		p.setID(getNewID());
 		p.setDate(new Date());
-		db.getPosts().add(p);
-	}
-	
-	private int getNewID(){
-		
-		int lastID = 1;
-		if(!db.getPosts().isEmpty()){
-			Post lastPost = db.getPosts().get(db.getPosts().size()-1);
-			lastID = lastPost.getID() + 1;	
-		}	
-		return lastID;
+		entityManager.persist(p);
 	}
 
 

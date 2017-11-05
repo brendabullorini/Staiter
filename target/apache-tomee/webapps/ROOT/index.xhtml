@@ -9,23 +9,21 @@
 	</ui:define>		
 	<ui:define name="content">
 	<div class="block">
-		<div class="block-header">
-			<h3 class="block-title">Posts</h3>
+		<div class="block-header">			
+			<h3 class="block-title"><h:outputText value="Bienvenido #{loginMb.currentUser.userName}" /></h3>
 		</div>	
 		<div class="block-content">
 			<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center"></th>
-							<th class="text-center" style="width: 10%;">Fecha</th>
+							<th class="text-center" style="width: 15%;">Fecha</th>
 							<th class="text-center" style="width: 15%;">Usuario</th>
 							<th>Contenido</th>							
 						</tr>
 					</thead>
 					<tbody>
 						<ui:repeat var="p" value="#{postMb.posts}">
-							<tr>
-								<td class="text-center">#{p.ID}</td>								
+							<tr>								
 								<td class="text-center">#{p.date}</td>
 								<td class="text-center">
 									<span class="label label-info">#{p.user.userName}</span>								
@@ -43,9 +41,10 @@
 		</div>	
 			<h:form styleClass="form-inline">
 				<div class="form-group">
-					<h:inputText styleClass="form-control" value="#{postMb.content}"/>						
+					<h:inputText styleClass="form-control" value="#{postMb.content}" rendered="#{loginMb.logged}"/>
+					<h:outputText value="Inicia sesion para agregar nuevos posts." rendered="#{! loginMb.logged}"/>						
 				</div>
-				<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger">Enviar</h:commandLink>			
+				<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger" rendered="#{loginMb.logged}">Enviar</h:commandLink>			
 			</h:form>		
 	</div>	
 	</ui:define>

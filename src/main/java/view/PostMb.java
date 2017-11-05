@@ -10,30 +10,31 @@ import model.Post;
 import model.User;
 
 @Named
-public class PostMb {
-	
+public class PostMb{
+
 	@Inject
 	PostController postController;
+	
+	@Inject
+	LoginMb loginMb;
 
-	private String userName;
 	private User user;
 	private String date;
 	private String content;
-	
+		
 	public String add(){
-		Post post = new Post(user, content);
+		System.out.println("/*/*/*/*/**/ CONTENIDO (aca llega null: " + content);
+		Post post = new Post(loginMb.getCurrentUser(), content);
 		postController.createPost(post);		
 		return "index";
 	}
 	
 	public List<Post> getPosts(){
-		return postController.getAll();
+		return postController.getAll();		
 	}
-
-	public List<Post> getUserPosts(){
-
-		//user = new User(1, "brendabullorini@gmail.com", "brendabullorini", "brenda");
-		return postController.getByUser(userName);
+	
+	public List<Post> getPostsByUser(){
+		return postController.getByUser(loginMb.getCurrentUser().getID());
 	}
 
 	public User getUser() {
@@ -45,17 +46,14 @@ public class PostMb {
 	}
 
 	public String getContent() {
+		System.out.println("Soy el content desde el getter (llega bien) " + content);
 		return content;
 	}
 	
 	public void setContent(String content) {
+		System.out.println("Hola entre al setter (llega bien): " + content);
 		this.content = content;
+		System.out.println("Content seteado: " + this.content);
 	}
 	
-	public void setUserName(String userName){
-		this.userName = userName;
-	}
-	
-	
-
 }

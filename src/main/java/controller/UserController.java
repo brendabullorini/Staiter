@@ -4,29 +4,28 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-import model.DB;
 import model.User;
 
 @Stateless
 public class UserController {
 	
-	@Inject
-	DB db;
 	
-	public List<User> getAll(){
-		return db.getUsers();
-	}
+    @PersistenceContext
+    private EntityManager entityManager;
+	
 	
 	public boolean createUser(User u){
 		boolean created = false;
-		if(!userExists(u.getEmail())){
-			u.setID(getNewID());
-			db.getUsers().add(u);
+		if(!userExists(u.getEmail())){			
+			entityManager.persist(u);
 			created = true;
 		}else{
 			created = false;
-		}
+		}		
 		
 		return created;
 	}
@@ -35,12 +34,17 @@ public class UserController {
 		
 		User user = null;
 		
-		for (User u : db.getUsers()) {
-			if(u.getEmail().equals(email) && u.getPassword().equals(password)){
-				user = u;
-				break;
-			}
-		}
+    	String hql = "Select u from User u where u.email = :user";
+		TypedQuery<User> q = entityManager.createQuery(hql,User.class);
+		q.setParameter("user", email);
+		
+		User userDB = q.getSingleResult();
+		
+        if(userDB != null){
+        	if(userDB.getPassword().equals(password)){
+        		user = userDB;        	
+        	}
+        }
 		
 		return user;
 	}
@@ -49,24 +53,16 @@ public class UserController {
 		
 		boolean exists = false;
 		
-		for (User u : db.getUsers()) {
-			if(u.getEmail().equals(email)){
-				exists = true;
-				break;
-			}
-		}
+    	String hql = "Select count(u) from User u where u.email = :user";
+       	
+    	Long count = (Long) entityManager.createQuery(hql)
+    		       .setParameter("user", email).getSingleResult();
+    	 	
+    	if(count > 0){
+    		exists = true;
+    	}        
 		
 		return exists;
 	}
-	
-	private int getNewID(){
-		
-		int lastID = 0;
-		if(!db.getUsers().isEmpty()){
-			User lastUser = db.getUsers().get(db.getUsers().size()-1);
-			lastID = lastUser.getID() + 1;	
-		}	
-		return lastID;
-	}	
 
 }
