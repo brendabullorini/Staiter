@@ -34,19 +34,21 @@
 					</tbody>
 			</table>	
 		</div>
-	</div>
+	</div>	
 	<div class="block">
 		<div class="block-header">
 			<h3 class="block-title">Nuevo post</h3>
 		</div>	
-			<h:form styleClass="form-inline">
-				<div class="form-group">
-					<h:inputText styleClass="form-control" value="#{postMb.content}" rendered="#{loginMb.logged}"/>
-					<h:outputText value="Inicia sesion para agregar nuevos posts." rendered="#{! loginMb.logged}"/>						
-				</div>
-				<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger" rendered="#{loginMb.logged}">Enviar</h:commandLink>			
-			</h:form>		
-	</div>	
+		<h:form styleClass="form-inline">
+			<h:panelGroup layout="block" rendered="#{!loginMb.logged}">
+				<h:outputText value="Inicia sesion para agregar nuevos posts." />
+			</h:panelGroup>
+			<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+				<h:inputText styleClass="form-control" value="#{postMb.content}"/>
+				<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger">Enviar</h:commandLink>		
+			</h:panelGroup>
+		</h:form>				
+	</div>				
 	</ui:define>
 </ui:composition>
 </html>
