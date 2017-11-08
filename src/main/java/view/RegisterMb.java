@@ -1,5 +1,7 @@
 package view;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -11,45 +13,35 @@ public class RegisterMb{
 	
 	@Inject
 	UserController userController;
-	
-	private String email;
-	private String userName;
-	private String password;
+
+	private User user = new User();
 	
 	public String add(){
-		User user = new User(email, userName, password);
-		boolean created = false;
-		created = userController.createUser(user);
-		if(created){
-			return "login";	
+		
+		if(user.getEmail().length()>0 && user.getUserName().length()>0 && user.getPassword().length()>0){
+			
+			boolean created = false;
+			created = userController.createUser(user);
+			if(created){
+				return "login";	
+			}else{
+				return null;
+			}	
 		}else{
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Complete todos los campos.",null);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
-		}		
+		}
+	
 	}
 
-	public String getEmail() {
-		return email;
+	public User getUser() {
+		return user;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}	
 	
 
 

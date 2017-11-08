@@ -3,6 +3,8 @@ package view;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,10 +20,8 @@ public class LoginMb implements Serializable{
 	@Inject
 	UserController userController;
 	
-	private String email;
-	private String userName;
-	private String password;
-	
+	private User user = new User();
+
 	private User currentUser;
 	
 	public boolean isLogged(){
@@ -29,12 +29,12 @@ public class LoginMb implements Serializable{
 	}
 	
 	public String login(){
-		currentUser = userController.verify(userName, password);
-		userName = null;
-		password = null;
+		currentUser = userController.verify(user.getEmail(), user.getPassword());
 		if(isLogged()){
 			return "index?faces-redirect=true";
 		}else {	
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
 		}
 			
@@ -45,32 +45,17 @@ public class LoginMb implements Serializable{
 		return "index";
 	}
 		
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}	
 	
 	public User getCurrentUser(){
 		return currentUser;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

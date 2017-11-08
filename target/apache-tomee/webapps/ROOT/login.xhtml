@@ -32,31 +32,33 @@
 		                            <h1 class="h2 font-w600 push-30-t push-5">Staiter</h1>
 		                            <p>Tu Twitter Davincero.</p>
 		
-		                            <h:form styleClass="js-validation-login form-horizontal push-30-t push-50" action="base_pages_dashboard.html" method="post">
+		                            <h:form styleClass="js-validation-login form-horizontal push-30-t push-50" form="login_form" method="post">
 		                                <div class="form-group">
 		                                    <div class="col-xs-12">
 		                                        <div class="form-material form-material-primary floating">
-		                                            <h:inputText styleClass="form-control" type="email" id="login-username" name="login-username" value="#{loginMb.userName}"/>
+		                                            <h:inputText styleClass="form-control" type="email" id="login-username" name="login-username" value="#{loginMb.user.email}"/>
 		                                            <label for="login-username">E-mail</label>
+		                                            <h:message for="login-username" style="color:red"/>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group">
 		                                    <div class="col-xs-12">
 		                                        <div class="form-material form-material-primary floating">
-		                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="login-password" name="login-password" value="#{loginMb.password}"/>
+		                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="login-password" name="login-password" value="#{loginMb.user.password}"/>
 		                                            <label for="login-password">Password</label>
+		                                            <h:message for="login-password" style="color:red"/>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group">
 		                                    <div class="col-xs-12 col-sm-6 col-md-4">                                        
-		                                        <h:commandLink action="#{loginMb.login()}" styleClass="btn btn-block btn-primary">
+		                                        <h:commandLink action="#{loginMb.login()}" styleClass="btn btn-block btn-primary" id="btn_login">
 		                                        	<i class="si si-login pull-right"></i>Entrar
 		                                        </h:commandLink>
 		                                    </div>
 		                                </div>
-		                                <!-- <h:messages errorClass="alert alert-danger"/>  -->
+		                                <h:messages globalOnly="true" errorClass="alert alert-danger"/>		                                                              
 		                            </h:form>
 		                        </div>
 		                    </div>

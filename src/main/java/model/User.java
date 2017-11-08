@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 @Entity
 public class User {
@@ -11,9 +12,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)	
 	private int ID;
+    
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", message = "El formato de e-mail es invalido.")
 	private String email;
+    
+    @NotNull
+    @Size(min=4,max=15, message = "El username debe tener entre 4 y 15 caracteres.")
 	private String userName;
+    
+    @NotNull
+    @Size(min=4,max=15, message = "La password debe tener entre 4 y 15 caracteres.")
 	private String password;
+    
+    public User(){
+    	
+    }
 		
 	public User(String email, String userName, String password) {
 		super();

@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.*;
 
 @Entity
 public class Post {
@@ -17,7 +20,13 @@ public class Post {
     
     @ManyToOne
 	private User user;
+    
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+    
+    @NotNull
+    @Size(min=1,max=140, message = "El post debe tener entre 1 y 140 caracteres.")
 	private String content;
 		
 	public Post(User user, String content) {

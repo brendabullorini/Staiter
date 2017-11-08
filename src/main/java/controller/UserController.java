@@ -17,7 +17,6 @@ public class UserController {
     @PersistenceContext
     private EntityManager entityManager;
 	
-	
 	public boolean createUser(User u){
 		boolean created = false;
 		if(!userExists(u.getEmail())){			
@@ -33,12 +32,16 @@ public class UserController {
 	public User verify(String email, String password){
 		
 		User user = null;
+		User userDB = null;
 		
     	String hql = "Select u from User u where u.email = :user";
 		TypedQuery<User> q = entityManager.createQuery(hql,User.class);
 		q.setParameter("user", email);
 		
-		User userDB = q.getSingleResult();
+		List<User> resultList = (List<User>) q.getResultList(); 
+		if (!(resultList.isEmpty())) {
+			userDB = resultList.get(0);
+		}
 		
         if(userDB != null){
         	if(userDB.getPassword().equals(password)){
