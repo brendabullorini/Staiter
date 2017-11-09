@@ -1,7 +1,10 @@
 view\LoginMb.class
 controller\PostController.class
 view\RegisterMb.class
+controller\CommentController.class
 controller\UserController.class
 view\PostMb.class
+view\CommentMb.class
+model\Comment.class
 model\User.class
 model\Post.class

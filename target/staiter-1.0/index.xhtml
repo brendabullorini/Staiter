@@ -10,30 +10,44 @@
 	<ui:define name="content">
 	<div class="block">
 		<div class="block-header">			
-			<h3 class="block-title"><h:outputText value="Bienvenido #{loginMb.currentUser.userName}" /></h3>
+			<h3 class="block-title"><h:outputText styleClass="font-w600" value="Bienvenido #{loginMb.currentUser.userName}" /></h3>
 		</div>	
-		<div class="block-content">
+		<h:panelGroup layout="block-content" id="postList">
+		<ui:repeat var="p" value="#{postMb.posts}">
 			<table class="table table-bordered table-striped">
-					<thead>
-						<tr>
-							<th class="text-center" style="width: 15%;">Fecha</th>
-							<th class="text-center" style="width: 15%;">Usuario</th>
-							<th>Contenido</th>							
-						</tr>
-					</thead>
 					<tbody>
-						<ui:repeat var="p" value="#{postMb.posts}">
 							<tr>								
-								<td class="text-center">#{p.date}</td>
-								<td class="text-center">
-									<span class="label label-info">#{p.user.userName}</span>								
+								<td class="text-center" style="width: 10%;">
+									<h:outputText value="#{p.date}" >
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									</h:outputText>
 								</td>
-								<td class="font-w600">#{p.content}</td>
-							</tr>
-						</ui:repeat>
-					</tbody>
+								<td class="font-w600"><span class="label label-info">#{p.user.userName}</span> #{p.content}</td>				
+							</tr>						
+						
+					</tbody>					
 			</table>	
-		</div>
+			<ul class="list-group">
+			<ui:repeat var="c" value="#{commentMb.listByPost(p)}">
+				<li class="list-group-item">
+					<small>
+						<h:outputText value="#{c.date}" >
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</small>
+					<strong>
+						<h:outputText value="#{c.user.userName}" />
+					</strong>
+					<h:outputText value="#{c.content}" />
+				</li>
+			</ui:repeat>
+				<h:form rendered="#{loginMb.logged}">
+					<h:inputText value="#{commentMb.comment}" styleClass="form-control" />
+					<h:commandLink styleClass="btn btn-primary" action="#{commentMb.create(p)}" >Agregar comentario</h:commandLink>
+				</h:form>
+			</ul>
+		</ui:repeat>
+		</h:panelGroup>
 	</div>	
 	<div class="block">
 		<div class="block-header">

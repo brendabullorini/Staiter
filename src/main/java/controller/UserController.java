@@ -3,7 +3,6 @@ package controller;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -12,7 +11,6 @@ import model.User;
 
 @Stateless
 public class UserController {
-	
 	
     @PersistenceContext
     private EntityManager entityManager;

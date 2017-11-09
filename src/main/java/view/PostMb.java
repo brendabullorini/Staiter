@@ -9,7 +9,6 @@ import javax.inject.Named;
 import javax.validation.constraints.Size;
 
 import model.Post;
-import model.User;
 import controller.PostController;
 
 @Named
