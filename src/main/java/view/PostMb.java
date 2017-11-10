@@ -37,6 +37,7 @@ public class PostMb{
 	}
 	
 	public List<Post> getPosts(){
+		System.out.println("/*/*//*/**/*/ OBTENER POSTS");
 		return postController.getAll();		
 	}
 	

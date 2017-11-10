@@ -1,69 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="template.xhtml">
 	<ui:define name="title">
-		<h:outputText value="#{msg.edit_of} #{msg.menu_items}" />
-	</ui:define>		
+		Bienvenido a tu nueva red social
+	</ui:define>
 	<ui:define name="content">
-	<div class="block">
-		<div class="block-header">			
-			<h3 class="block-title"><h:outputText styleClass="font-w600" value="Bienvenido #{loginMb.currentUser.userName}" /></h3>
-		</div>	
-		<h:panelGroup layout="block-content" id="postList">
-		<ui:repeat var="p" value="#{postMb.posts}">
-			<table class="table table-bordered table-striped">
-					<tbody>
-							<tr>								
-								<td class="text-center" style="width: 10%;">
-									<h:outputText value="#{p.date}" >
-										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-									</h:outputText>
-								</td>
-								<td class="font-w600"><span class="label label-info">#{p.user.userName}</span> #{p.content}</td>				
-							</tr>						
-						
-					</tbody>					
-			</table>	
-			<ul class="list-group">
-			<ui:repeat var="c" value="#{commentMb.listByPost(p)}">
-				<li class="list-group-item">
-					<small>
-						<h:outputText value="#{c.date}" >
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-						</h:outputText>
-					</small>
-					<strong>
-						<h:outputText value="#{c.user.userName}" />
-					</strong>
-					<h:outputText value="#{c.content}" />
-				</li>
+		<h:form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Nuevo post</h3>
+				</div>
+				<h:panelGroup styleClass="panel-body" rendered="#{loginMb.logged}">
+					<h:inputTextarea value="#{postMb.content}"
+						styleClass="form-control" id="postContent">
+					</h:inputTextarea>
+					<h:message for="postContent"></h:message>
+					<h:commandLink styleClass="btn btn-primary"
+						action="#{postMb.add()}">
+			    	Publicar
+			    	<f:ajax render="@form :postList" execute="@form"></f:ajax>
+					</h:commandLink>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{!loginMb.logged}">
+					<h:outputText styleClass="form-control" value="Inicia sesion para agregar nuevos posts." />
+				</h:panelGroup>
+			</div>
+		</h:form>
+		<h:panelGroup layout="block" id="postList">
+			<ui:repeat var="p" value="#{postMb.posts}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<h:outputText value="#{p.user.userName}" />
+							<small> <h:outputText value="#{p.date}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+							</small>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<h:outputText value="#{p.content}" />
+						<ul class="list-group">
+							<ui:repeat var="c" value="#{commentMb.listByPost(p)}">
+								<li class="list-group-item">
+									<strong>
+										<h:outputText value="#{c.user.userName}" />
+									</strong>
+									<small>
+										<h:outputText value="#{c.date}" >
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+									</small>
+									<h:outputText value="#{c.content}" />
+								</li>
+							</ui:repeat>
+							<h:form rendered="#{loginMb.logged}">
+								<h:inputText value="#{commentMb.comment}" styleClass="form-control" />
+								<h:commandLink styleClass="btn btn-primary" action="#{commentMb.create(p)}" >Comentar</h:commandLink>
+							</h:form>
+						</ul>
+					</div>
+				</div>
 			</ui:repeat>
-				<h:form rendered="#{loginMb.logged}">
-					<h:inputText value="#{commentMb.comment}" styleClass="form-control" />
-					<h:commandLink styleClass="btn btn-primary" action="#{commentMb.create(p)}" >Agregar comentario</h:commandLink>
-				</h:form>
-			</ul>
-		</ui:repeat>
 		</h:panelGroup>
-	</div>	
-	<div class="block">
-		<div class="block-header">
-			<h3 class="block-title">Nuevo post</h3>
-		</div>	
-		<h:form styleClass="form-inline">
-			<h:panelGroup layout="block" rendered="#{!loginMb.logged}">
-				<h:outputText value="Inicia sesion para agregar nuevos posts." />
-			</h:panelGroup>
-			<h:panelGroup layout="block" rendered="#{loginMb.logged}">
-				<h:inputText styleClass="form-control" value="#{postMb.content}"/>
-				<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger">Enviar</h:commandLink>		
-			</h:panelGroup>
-			<h:messages globalOnly="true" errorClass="alert alert-danger"/>
-		</h:form>				
-	</div>				
 	</ui:define>
 </ui:composition>
 </html>
