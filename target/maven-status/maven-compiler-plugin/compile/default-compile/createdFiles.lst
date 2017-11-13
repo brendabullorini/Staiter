@@ -2,6 +2,7 @@ view\LoginMb.class
 controller\PostController.class
 view\RegisterMb.class
 controller\CommentController.class
+auth\AuthorizationFilter.class
 controller\UserController.class
 view\PostMb.class
 view\CommentMb.class

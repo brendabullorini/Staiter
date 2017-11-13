@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import view.LoginMb;
 
+
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml", "/" })
 public class AuthorizationFilter implements Filter {
 
@@ -35,11 +36,9 @@ public class AuthorizationFilter implements Filter {
 	public AuthorizationFilter() {
 	}
 
-	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {		
 	}
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
@@ -50,13 +49,13 @@ public class AuthorizationFilter implements Filter {
 			
 			// Si es publico
 
-			/*
-			 * Esto nunca me anduvo
-			 * 
-			 * if (publicPath.stream().anyMatch((pp) -> path.matches(pp))) {
-				chain.doFilter(request, response);
-				return;
-			}*/
+			
+			 //Esto nunca me anduvo
+			 
+			 // if (publicPath.stream().anyMatch((pp) -> path.matches(pp))) {
+			 //	chain.doFilter(request, response);
+			 //	return;
+			 //}
 			
 			if (publicPath.contains(path)) {
 				chain.doFilter(request, response);
@@ -87,9 +86,9 @@ public class AuthorizationFilter implements Filter {
 		return uri;
 	}
 
-	@Override
 	public void destroy() {
-
+		// TODO Auto-generated method stub
+		
 	}
 
 }
