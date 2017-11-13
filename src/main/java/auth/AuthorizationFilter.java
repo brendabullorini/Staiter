@@ -27,8 +27,8 @@ public class AuthorizationFilter implements Filter {
 					"/index.xhtml",
 					"/register.xhtml",
 					"/login.xhtml",
-					".*\\.js.xhtml",
-					".*\\.css.xhtml");
+					"*\\.js.xhtml",
+					"*\\.css.xhtml");
 
 	@Inject
 	private LoginMb loginMb;
@@ -42,10 +42,11 @@ public class AuthorizationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
+			
 			HttpServletRequest reqt = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
 
-			final String path = getCurrentPath(reqt);			
+			final String path = getCurrentPath(reqt);	
 			
 			// Si es publico
 
@@ -57,10 +58,16 @@ public class AuthorizationFilter implements Filter {
 			 //	return;
 			 //}
 			
-			if (publicPath.contains(path)) {
-				chain.doFilter(request, response);
-				return;
+	
+			for (String pp : publicPath) {
+				System.out.println("PP " + pp);
+				if (path.contains(pp)) {
+					chain.doFilter(request, response);
+					match = true;
+					return;
+				}
 			}
+
 			
 			//Si está logueado
 			if (loginMb != null && loginMb.isLogged()) {
@@ -76,6 +83,8 @@ public class AuthorizationFilter implements Filter {
 	}
 
 	private String getCurrentPath(HttpServletRequest reqt) {
+		
+		
 		String uri = reqt.getRequestURI().replaceAll(";.*", "");
 		String contextPath = reqt.getContextPath();
 
@@ -88,6 +97,7 @@ public class AuthorizationFilter implements Filter {
 
 	public void destroy() {
 		// TODO Auto-generated method stub
+		System.out.println("DESTROY");
 		
 	}
 
