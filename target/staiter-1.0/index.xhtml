@@ -6,27 +6,23 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="template.xhtml">
 	<ui:define name="title">
-		Bienvenido a tu nueva red social
+		Bienvenido a Staiter
 	</ui:define>
 	<ui:define name="content">
-		<h:form>
+		<h:form id="addPostForm">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Nuevo post</h3>
 				</div>
-				<h:panelGroup styleClass="panel-body" rendered="#{loginMb.logged}">
-					<h:inputTextarea value="#{postMb.content}"
-						styleClass="form-control" id="postContent">
-					</h:inputTextarea>
-					<h:message for="postContent"></h:message>
-					<h:commandLink styleClass="btn btn-primary"
-						action="#{postMb.add()}">
-			    	Publicar
-			    	<f:ajax render="@form :postList" execute="@form"></f:ajax>
-					</h:commandLink>
-				</h:panelGroup>
 				<h:panelGroup layout="block" rendered="#{!loginMb.logged}">
-					<h:outputText styleClass="form-control" value="Inicia sesion para agregar nuevos posts." />
+					<h:outputText value="Inicia sesion para agregar nuevos posts." />
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+					<h:inputText styleClass="form-control" value="#{postMb.content}" id="postContent"/>
+					<h:message for="postContent"></h:message>
+					<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger">Enviar
+					<f:ajax render=":addPostForm :postList :mensajes" execute=":addPostForm"></f:ajax>
+					</h:commandLink>		
 				</h:panelGroup>
 			</div>
 		</h:form>
@@ -42,7 +38,7 @@
 							</small>
 						</h3>
 					</div>
-					<div class="panel-body">
+					<h:panelGroup layout="block" styleClass="panel-body" id="commentList">
 						<h:outputText value="#{p.content}" />
 						<ul class="list-group">
 							<ui:repeat var="c" value="#{commentMb.listByPost(p)}">
@@ -58,12 +54,16 @@
 									<h:outputText value="#{c.content}" />
 								</li>
 							</ui:repeat>
-							<h:form rendered="#{loginMb.logged}">
-								<h:inputText value="#{commentMb.comment}" styleClass="form-control" />
-								<h:commandLink styleClass="btn btn-primary" action="#{commentMb.create(p)}" >Comentar</h:commandLink>
+							<h:form id="commentForm" rendered="#{loginMb.logged}">
+								<h:panelGroup layout="block">
+									<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
+									<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
+									<!-- <f:ajax render=":commentForm :commentList" execute=":commentForm"></f:ajax> -->
+									</h:commandLink>
+								</h:panelGroup>
 							</h:form>
 						</ul>
-					</div>
+					</h:panelGroup>
 				</div>
 			</ui:repeat>
 		</h:panelGroup>
