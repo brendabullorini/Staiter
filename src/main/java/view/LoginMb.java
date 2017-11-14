@@ -29,12 +29,16 @@ public class LoginMb implements Serializable{
 	}
 	
 	public String login(){
-		currentUser = userController.verify(user.getEmail(), user.getPassword());
-		if(isLogged()){
-			return "index?faces-redirect=true";
-		}else {	
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+		if(user.getEmail() != null && user.getPassword() != null){
+			currentUser = userController.verify(user.getEmail(), user.getPassword());		
+			if(isLogged()){
+				return "index?faces-redirect=true";
+			}else {				
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				return null;
+			}
+		}else{	
 			return null;
 		}
 			

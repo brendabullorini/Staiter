@@ -58,16 +58,13 @@ public class AuthorizationFilter implements Filter {
 			 //	return;
 			 //}
 			
-	
+			
 			for (String pp : publicPath) {
-				System.out.println("PP " + pp);
 				if (path.contains(pp)) {
 					chain.doFilter(request, response);
-					match = true;
 					return;
-				}
+				}				
 			}
-
 			
 			//Si está logueado
 			if (loginMb != null && loginMb.isLogged()) {
@@ -75,7 +72,10 @@ public class AuthorizationFilter implements Filter {
 				return;
 			}
 			
+
 			resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
+
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -28,8 +28,8 @@
 		</h:form>
 		<h:panelGroup layout="block" id="postList">
 			<ui:repeat var="p" value="#{postMb.posts}">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+				<h:panelGroup layout="block" id="post" styleClass="panel panel-default">
+									<div class="panel-heading">
 						<h3 class="panel-title">
 							<h:outputText value="#{p.user.userName}" />
 							<small> <h:outputText value="#{p.date}">
@@ -38,10 +38,11 @@
 							</small>
 						</h3>
 					</div>
+					<h:form id="commentForm">
 					<h:panelGroup layout="block" styleClass="panel-body" id="commentList">
 						<h:outputText value="#{p.content}" />
 						<ul class="list-group">
-							<ui:repeat var="c" value="#{commentMb.listByPost(p)}">
+							<ui:repeat id="rep_comments" var="c" value="#{commentMb.listByPost(p)}">
 								<li class="list-group-item">
 									<strong>
 										<h:outputText value="#{c.user.userName}" />
@@ -53,18 +54,17 @@
 									</small>
 									<h:outputText value="#{c.content}" />
 								</li>
-							</ui:repeat>
-							<h:form id="commentForm" rendered="#{loginMb.logged}">
-								<h:panelGroup layout="block">
-									<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
-									<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
-									<!-- <f:ajax render=":commentForm :commentList" execute=":commentForm"></f:ajax> -->
-									</h:commandLink>
-								</h:panelGroup>
-							</h:form>
+							</ui:repeat>							
+							<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+								<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
+								<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
+								<f:ajax render="commentList" execute="@form"></f:ajax>
+								</h:commandLink>
+							</h:panelGroup>							
 						</ul>
 					</h:panelGroup>
-				</div>
+					</h:form>
+				</h:panelGroup>
 			</ui:repeat>
 		</h:panelGroup>
 	</ui:define>

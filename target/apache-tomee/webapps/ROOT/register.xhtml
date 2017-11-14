@@ -29,33 +29,38 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">                                            
-                                            <h:inputText styleClass="form-control" type="text" id="register-username" name="register-username" value="#{registerMb.user.userName}"/>
+                                            <h:inputText styleClass="form-control" label="Usuario" type="text" id="register-username" name="register-username" value="#{registerMb.user.userName}"/>
                                             <label for="register-username">Usuario</label>
+                                            <h:message id="reg_msge_username" for="register-username" style="color:red"/>	
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">
-                                            <h:inputText styleClass="form-control" type="email" id="register-email" name="register-email" value="#{registerMb.user.email}"/>                                          
+                                            <h:inputText styleClass="form-control" label="E-mail" type="email" id="register-email" name="register-email" value="#{registerMb.user.email}"/>                                          
                                             <label for="register-email">E-mail</label>
+                                            <h:message id="reg_msge_email" for="register-email" style="color:red"/>	
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">                                            
-                                            <h:inputSecret styleClass="form-control" class="form-control" type="password" id="register-password" name="register-password" value="#{registerMb.user.password}"/>
+                                            <h:inputSecret styleClass="form-control" class="form-control" label="Password" type="password" id="register-password" name="register-password" value="#{registerMb.user.password}"/>
                                             <label for="register-password">Password</label>
+                                            <h:message id="reg_msge_password" for="register-password" style="color:red"/>	
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-6 col-md-5">                                        
-                                        <h:commandLink action="#{registerMb.add()}" styleClass="btn btn-block btn-success"><i class="fa fa-plus pull-right"></i>Registrarme</h:commandLink>
+                                        <h:commandLink action="#{registerMb.add()}" styleClass="btn btn-block btn-success"><i class="fa fa-plus pull-right"></i>Registrarme
+                                        <f:ajax render="msges_reg reg_msge_email reg_msge_username reg_msge_password" execute="@form"></f:ajax>
+                                        </h:commandLink>                                        
                                     </div>
                                 </div>
-                                <h:messages globalOnly="true" errorClass="alert alert-danger"/>
+                                <h:messages id="msges_reg" globalOnly="true" errorClass="alert alert-danger"/>
                             </h:form>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ public class PostController {
 	
 	public List<Post> getAll(){
 		
-    	String hql = "Select p from Post p";
+    	String hql = "Select p from Post p order by p.ID desc";
 		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
         return q.getResultList();
 	}
@@ -26,7 +26,7 @@ public class PostController {
 	public List<Post> getByUser(int ID){
 		
 		System.out.println("ID en controller: " + String.valueOf(ID));
-    	String hql = "Select p from Post p where p.user.ID = :user";
+    	String hql = "Select p from Post p where p.user.ID = :user order by p.ID desc";
 		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
 		q.setParameter("user", ID);
         return q.getResultList();

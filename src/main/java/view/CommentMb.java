@@ -27,9 +27,6 @@ public class CommentMb {
 	
 	public void create(Post post){
 		User user = loginMb.getCurrentUser();
-		System.out.println("/*/*/*/*/*/*/*/* CREATE POST " + user.getUserName());
-		System.out.println("/*/*/*/*/*/*/*/* CREATE POST " + post.getContent());
-		System.out.println("/*/*/*/*/*/*/*/* CREATE POST " + comment);
 		commentCntrl.create(user, post, comment);
 	}
 

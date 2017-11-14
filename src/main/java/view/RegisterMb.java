@@ -20,16 +20,21 @@ public class RegisterMb{
 		
 		if(user.getEmail().length()>0 && user.getUserName().length()>0 && user.getPassword().length()>0){
 			
-			boolean created = false;
-			created = userController.createUser(user);
-			if(created){
-				return "login";	
+			if(userController.userExists(user.getEmail())){
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"El e-mal ingresado ya existe.",null);
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				return null;				
 			}else{
-				return null;
-			}	
+				boolean created = false;
+				created = userController.createUser(user);
+				if(created){
+					return "login";	
+				}else{
+					return null;
+				}
+			}			
+	
 		}else{
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Complete todos los campos.",null);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
 			return null;
 		}
 	
