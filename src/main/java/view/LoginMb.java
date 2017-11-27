@@ -54,6 +54,10 @@ public class LoginMb implements Serializable{
 		return currentUser;
 	}
 	
+	public void setCurrentUser(User user){
+		this.currentUser = user;
+	}
+	
 	public User getUser() {
 		return user;
 	}

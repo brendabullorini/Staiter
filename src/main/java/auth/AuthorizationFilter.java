@@ -27,8 +27,8 @@ public class AuthorizationFilter implements Filter {
 					"/index.xhtml",
 					"/register.xhtml",
 					"/login.xhtml",
-					"*\\.js.xhtml",
-					"*\\.css.xhtml");
+					".*\\.js.xhtml",
+					".*\\.css.xhtml");
 
 	@Inject
 	private LoginMb loginMb;
@@ -47,24 +47,13 @@ public class AuthorizationFilter implements Filter {
 			HttpServletResponse resp = (HttpServletResponse) response;
 
 			final String path = getCurrentPath(reqt);	
-			
-			// Si es publico
 
-			
-			 //Esto nunca me anduvo
 			 
-			 // if (publicPath.stream().anyMatch((pp) -> path.matches(pp))) {
-			 //	chain.doFilter(request, response);
-			 //	return;
-			 //}
-			
-			
-			for (String pp : publicPath) {
-				if (path.contains(pp)) {
-					chain.doFilter(request, response);
-					return;
-				}				
-			}
+			 if (publicPath.stream().anyMatch((pp) -> path.matches(pp))) {
+				 chain.doFilter(request, response);
+				 return;
+			 }
+
 			
 			//Si está logueado
 			if (loginMb != null && loginMb.isLogged()) {

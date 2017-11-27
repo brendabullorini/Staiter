@@ -9,7 +9,7 @@
 		Bienvenido a Staiter
 	</ui:define>
 	<ui:define name="content">
-		<h:form id="addPostForm">
+		<h:form id="addPostForm" enctype="multipart/form-data">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Nuevo post</h3>
@@ -20,8 +20,10 @@
 				<h:panelGroup layout="block" rendered="#{loginMb.logged}">
 					<h:inputText styleClass="form-control" value="#{postMb.content}" id="postContent"/>
 					<h:message for="postContent"></h:message>
+					<h:inputFile id="file" value="#{postMb.file}"/>
+					<h:message for="file"></h:message>
 					<h:commandLink action="#{postMb.add()}" styleClass="btn btn-danger">Enviar
-					<f:ajax render=":addPostForm :postList :mensajes" execute=":addPostForm"></f:ajax>
+						<!--<f:ajax render=":addPostForm :postList :mensajes" execute=":addPostForm"></f:ajax>-->
 					</h:commandLink>		
 				</h:panelGroup>
 			</div>
@@ -29,21 +31,26 @@
 		<h:panelGroup layout="block" id="postList">
 			<ui:repeat var="p" value="#{postMb.posts}">
 				<h:panelGroup layout="block" id="post" styleClass="panel panel-default">
-									<div class="panel-heading">
-						<h3 class="panel-title">
+					<h:panelGroup styleClass="panel-heading">
+						<h3 class="panel-title">							
+							<img src="/image/#{p.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" ></img>						
 							<h:outputText value="#{p.user.userName}" />
 							<small> <h:outputText value="#{p.date}">
 									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 								</h:outputText>
 							</small>
 						</h3>
-					</div>
+					</h:panelGroup>
 					<h:form id="commentForm">
 					<h:panelGroup layout="block" styleClass="panel-body" id="commentList">
 						<h:outputText value="#{p.content}" />
+						<h:panelGroup styleClass="img-container fx-img-zoom-in">	                        
+	                        <img src="/image/#{p.image.path}" class="media-object" style="width:200px"></img>
+                        </h:panelGroup>						
 						<ul class="list-group">
 							<ui:repeat id="rep_comments" var="c" value="#{commentMb.listByPost(p)}">
-								<li class="list-group-item">
+								<li class="list-group-item">									
+									<img src="/image/#{c.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px"></img>
 									<strong>
 										<h:outputText value="#{c.user.userName}" />
 									</strong>

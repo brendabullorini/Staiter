@@ -25,7 +25,7 @@
                             <!-- Register Title -->
                             <h1 class="h2 font-w600 push-30-t push-5">Staiter</h1>
                             <p>Por favor, complete los datos para crear su cuenta.</p>
-                            <h:form class="js-validation-register form-horizontal push-50-t push-50">
+                            <h:form class="js-validation-register form-horizontal push-50-t push-50" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-success">                                            
@@ -54,9 +54,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+		                            <label class="col-xs-12" for="example-file-input">Foto de perfil</label>
+		                            <div class="col-xs-12">
+		                                <h:inputFile id="file" value="#{registerMb.file}"/>
+		                            </div>
+                       			</div>
+                                <div class="form-group">
                                     <div class="col-xs-12 col-sm-6 col-md-5">                                        
                                         <h:commandLink action="#{registerMb.add()}" styleClass="btn btn-block btn-success"><i class="fa fa-plus pull-right"></i>Registrarme
-                                        <f:ajax render="msges_reg reg_msge_email reg_msge_username reg_msge_password" execute="@form"></f:ajax>
+                                        <!-- <f:ajax render="msges_reg reg_msge_email reg_msge_username reg_msge_password" execute="@form"></f:ajax> -->
                                         </h:commandLink>                                        
                                     </div>
                                 </div>

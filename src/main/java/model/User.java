@@ -1,9 +1,11 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 
 @Entity
@@ -24,6 +26,9 @@ public class User {
     @NotNull
     @Size(min=4,max=15, message = "La password debe tener entre 4 y 15 caracteres.")
 	private String password;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    private Image image;
     
     public User(){
     	
@@ -74,6 +79,23 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
+	public boolean hasProfileImage(){
+		if(this.image != null){
+			return true;
+		}else{
+			return false;
+		}
+			
 	}
 
 }
