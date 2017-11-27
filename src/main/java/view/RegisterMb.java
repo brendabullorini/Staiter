@@ -30,8 +30,6 @@ public class RegisterMb{
 	private Part file;
 	
 	public String add(){
-		
-		System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/* ENTRAMOS AL ADD");
 								
 		if(user.getEmail().length()>0 && user.getUserName().length()>0 && user.getPassword().length()>0){
 			
@@ -42,7 +40,6 @@ public class RegisterMb{
 			}else{
 				boolean created = false;
 				if(file != null && file.getSize() > 0){
-					System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/* HAY UN FILE SELECCIONADO");
 					try{
 						Image img = null;
 						if(file.getContentType().startsWith("image/")){
@@ -50,13 +47,11 @@ public class RegisterMb{
 							user.setImage(img);
 						}
 					} catch (Exception e){
-						System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/* ERROR");
 						e.printStackTrace();
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo cargar la foto, reintente.", null);
 						FacesContext.getCurrentInstance().addMessage(null, msg);
 					}	
 				}
-				System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/* IMAGE DE USUARIO: " + user.getImage().getPath());
 				created = userController.createUser(user);
 				if(created){
 					return "login";	

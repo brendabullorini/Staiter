@@ -32,43 +32,48 @@
 			<ui:repeat var="p" value="#{postMb.posts}">
 				<h:panelGroup layout="block" id="post" styleClass="panel panel-default">
 					<h:panelGroup styleClass="panel-heading">
-						<h3 class="panel-title">							
-							<img src="/image/#{p.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" ></img>						
+						<h3 class="panel-title">	
+							<img src="/image/#{p.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" ></img>
+							<!-- <h:graphicImage styleClass="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" value="/image/#{p.user.image.path}"/> -->																
 							<h:outputText value="#{p.user.userName}" />
 							<small> <h:outputText value="#{p.date}">
 									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 								</h:outputText>
 							</small>
 						</h3>
-					</h:panelGroup>
+					</h:panelGroup>				
 					<h:form id="commentForm">
 					<h:panelGroup layout="block" styleClass="panel-body" id="commentList">
 						<h:outputText value="#{p.content}" />
 						<h:panelGroup styleClass="img-container fx-img-zoom-in">	                        
-	                        <img src="/image/#{p.image.path}" class="media-object" style="width:200px"></img>
-                        </h:panelGroup>						
-						<ul class="list-group">
-							<ui:repeat id="rep_comments" var="c" value="#{commentMb.listByPost(p)}">
-								<li class="list-group-item">									
-									<img src="/image/#{c.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px"></img>
-									<strong>
-										<h:outputText value="#{c.user.userName}" />
-									</strong>
-									<small>
-										<h:outputText value="#{c.date}" >
-											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-										</h:outputText>
-									</small>
-									<h:outputText value="#{c.content}" />
-								</li>
-							</ui:repeat>							
-							<h:panelGroup layout="block" rendered="#{loginMb.logged}">
-								<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
-								<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
-								<f:ajax render="commentList" execute="@form"></f:ajax>
-								</h:commandLink>
-							</h:panelGroup>							
-						</ul>
+	                        <!-- <img src="/image/#{p.image.path}" class="media-object" style="width:200px"></img> -->
+	                        <h:graphicImage rendered="#{p.hasImage()}" class="media-object" style="width:200px" value="/image/#{p.image.path}"/>
+                        </h:panelGroup>	                    					
+							<ul class="list-group">
+								<h:panelGroup id="panel-comentarios">
+									<ui:repeat id="rep_comments" var="c" value="#{commentMb.listByPost(p)}">
+										<li class="list-group-item">									
+											<!-- <img src="/image/#{c.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px"></img> -->
+											<h:graphicImage rendered="#{c.user.hasProfileImage()}" styleClass="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" value="/image/#{c.user.image.path}"/>
+											<strong>
+												<h:outputText value="#{c.user.userName}" />
+											</strong>
+											<small>
+												<h:outputText value="#{c.date}" >
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+												</h:outputText>
+											</small>
+											<h:outputText value="#{c.content}" />
+										</li>
+									</ui:repeat>
+								</h:panelGroup>							
+								<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+									<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
+									<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
+									<f:ajax render="commentList" execute="@form"></f:ajax>
+									</h:commandLink>
+								</h:panelGroup>							
+							</ul>
 					</h:panelGroup>
 					</h:form>
 				</h:panelGroup>
