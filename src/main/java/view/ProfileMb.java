@@ -48,7 +48,7 @@ public class ProfileMb {
 				if(newPassword.equals(confirmPassword)){
 					user.setPassword(newPassword);
 				}else{					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"La nueva nueva y su confirmacion no coinciden.", null);
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"La nueva clave y su confirmacion no coinciden.", null);
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 					errorCarga = true;
 				}
