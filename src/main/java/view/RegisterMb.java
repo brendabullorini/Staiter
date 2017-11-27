@@ -39,7 +39,9 @@ public class RegisterMb{
 				return null;				
 			}else{
 				boolean created = false;
+				System.out.println("///////////////////////////////////////////////// EL FILE ESTA VACIO O QUE");
 				if(file != null && file.getSize() > 0){
+					System.out.println("///////////////////////////////////////////////// FILE CON ALGO");
 					try{
 						Image img = null;
 						if(file.getContentType().startsWith("image/")){
@@ -51,6 +53,8 @@ public class RegisterMb{
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo cargar la foto, reintente.", null);
 						FacesContext.getCurrentInstance().addMessage(null, msg);
 					}	
+				}else{
+					System.out.println("///////////////////////////////////////////////// FILE SIN NADA");
 				}
 				created = userController.createUser(user);
 				if(created){

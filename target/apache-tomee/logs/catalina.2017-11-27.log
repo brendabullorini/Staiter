@@ -5194,3 +5194,235 @@ Caused by: java.net.BindException: Address already in use: bind
 27-Nov-2017 16:58:27.298 INFO [http-nio-8080-exec-1] org.apache.myfaces.el.unified.ResolverBuilderBase.sortELResolvers Chain of EL resolvers for JSP sorted with: org.apache.myfaces.el.unified.OpenWebBeansELResolverComparator@3a64bd3c and the result order is [org.apache.myfaces.el.unified.resolver.implicitobject.ImplicitObjectResolver@7f662414, org.apache.myfaces.el.FlashELResolver@299ea302, org.apache.myfaces.el.unified.resolver.ManagedBeanResolver@4ed3da48, org.apache.myfaces.el.unified.resolver.ResourceBundleResolver@51c103f3, org.apache.myfaces.el.unified.resolver.ResourceResolver@1f49db5b, org.apache.webbeans.el22.WebBeansELResolver@4313ed03, org.apache.myfaces.el.convert.VariableResolverToELResolver@13c26eb3, org.apache.myfaces.el.convert.PropertyResolverToELResolver@4ac529a3]
 27-Nov-2017 16:58:27.480 INFO [http-nio-8080-exec-1] org.apache.myfaces.el.unified.ResolverBuilderBase.sortELResolvers Chain of EL resolvers for Faces sorted with: org.apache.myfaces.el.unified.OpenWebBeansELResolverComparator@3a64bd3c and the result order is [org.apache.myfaces.el.unified.resolver.implicitobject.ImplicitObjectResolver@1b07a0a3, org.apache.myfaces.el.unified.resolver.CompositeComponentELResolver@47203d35, org.apache.webbeans.el22.WebBeansELResolver@4313ed03, org.apache.myfaces.el.convert.VariableResolverToELResolver@47976494, org.apache.myfaces.el.convert.PropertyResolverToELResolver@24fcc5f4, org.apache.myfaces.el.FlashELResolver@2587b70, org.apache.myfaces.el.unified.resolver.ManagedBeanResolver@4457379b, org.apache.myfaces.el.unified.resolver.ResourceResolver@38984841, javax.el.ResourceBundleELResolver@7a89f9c3, org.apache.myfaces.el.unified.resolver.ResourceBundleResolver@3b4b9e19, org.apache.el.stream.StreamELResolverImpl@465d8d04, javax.el.StaticFieldELResolver@3c7d1fce, javax.el.MapELResolver@98fae63, javax.el.ListELResolver@6ed3421d, javax.el.ArrayELResolver@444cc76e, javax.el.BeanELResolver@109b2346]
 27-Nov-2017 16:58:27.941 INFO [http-nio-8080-exec-1] javax.faces.component._ExternalSpecifications.isBeanValidationAvailable MyFaces Bean Validation support enabled
+27-Nov-2017 17:14:31.440 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+27-Nov-2017 17:14:31.441 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Pausing ProtocolHandler ["http-nio-8080"]
+27-Nov-2017 17:14:31.621 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Pausing ProtocolHandler ["ajp-nio-8009"]
+27-Nov-2017 17:14:31.819 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Stopping service [Catalina]
+27-Nov-2017 17:14:31.901 INFO [localhost-startStop-2] org.apache.openejb.assembler.classic.Assembler.destroyApplication Undeploying app: E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT
+27-Nov-2017 17:14:32.266 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [ROOT] registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+27-Nov-2017 17:14:32.268 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [MySQL Statement Cancellation Timer] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+27-Nov-2017 17:14:32.277 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Stopping ProtocolHandler ["http-nio-8080"]
+27-Nov-2017 17:14:32.281 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Stopping ProtocolHandler ["ajp-nio-8009"]
+27-Nov-2017 17:14:32.285 INFO [main] org.apache.openejb.server.SimpleServiceManager.stop Stopping server services
+27-Nov-2017 17:14:32.305 INFO [main] org.apache.openejb.assembler.classic.Assembler.doResourceDestruction Closing DataSource: StaiterDB
+27-Nov-2017 17:14:32.310 INFO [main] org.apache.openejb.assembler.classic.Assembler.doResourceDestruction Closing DataSource: StaiterDBNonJta
+27-Nov-2017 17:14:32.311 INFO [main] org.apache.catalina.loader.WebappClassLoaderBase.checkStateForResourceLoading Illegal access: this web application instance has been stopped already. Could not load [com.mysql.jdbc.profiler.ProfilerEventHandlerFactory]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+ java.lang.IllegalStateException: Illegal access: this web application instance has been stopped already. Could not load [com.mysql.jdbc.profiler.ProfilerEventHandlerFactory]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+	at org.apache.catalina.loader.WebappClassLoaderBase.checkStateForResourceLoading(WebappClassLoaderBase.java:1305)
+	at org.apache.catalina.loader.WebappClassLoaderBase.checkStateForClassLoading(WebappClassLoaderBase.java:1293)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1158)
+	at org.apache.tomee.catalina.TomEEWebappClassLoader.loadClass(TomEEWebappClassLoader.java:208)
+	at org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1119)
+	at com.mysql.jdbc.ConnectionImpl.realClose(ConnectionImpl.java:4273)
+	at com.mysql.jdbc.ConnectionImpl.close(ConnectionImpl.java:1444)
+	at org.apache.tomcat.jdbc.pool.PooledConnection.disconnect(PooledConnection.java:377)
+	at org.apache.tomcat.jdbc.pool.PooledConnection.release(PooledConnection.java:567)
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.release(ConnectionPool.java:611)
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.close(ConnectionPool.java:398)
+	at org.apache.tomcat.jdbc.pool.DataSourceProxy.close(DataSourceProxy.java:231)
+	at org.apache.tomee.jdbc.TomEEDataSourceCreator.doDestroy(TomEEDataSourceCreator.java:79)
+	at org.apache.openejb.resource.jdbc.pool.PoolDataSourceCreator.destroy(PoolDataSourceCreator.java:88)
+	at org.apache.openejb.resource.jdbc.DataSourceFactory.destroy(DataSourceFactory.java:517)
+	at org.apache.openejb.assembler.classic.Assembler.doResourceDestruction(Assembler.java:2105)
+	at org.apache.openejb.assembler.classic.Assembler.destroyResource(Assembler.java:2010)
+	at org.apache.openejb.assembler.classic.Assembler.destroyResourceTree(Assembler.java:1959)
+	at org.apache.openejb.assembler.classic.Assembler.destroy(Assembler.java:1885)
+	at org.apache.openejb.OpenEJB.destroy(OpenEJB.java:266)
+	at org.apache.tomee.catalina.TomcatLoader.destroy(TomcatLoader.java:394)
+	at org.apache.tomee.catalina.TomcatWebAppBuilder.afterStop(TomcatWebAppBuilder.java:2128)
+	at org.apache.tomee.catalina.GlobalListenerSupport.lifecycleEvent(GlobalListenerSupport.java:165)
+	at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:94)
+	at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:395)
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:234)
+	at org.apache.catalina.startup.Catalina.stop(Catalina.java:729)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:691)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:355)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:495)
+
+27-Nov-2017 17:14:32.320 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Destroying ProtocolHandler ["http-nio-8080"]
+27-Nov-2017 17:14:32.361 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Destroying ProtocolHandler ["ajp-nio-8009"]
+27-Nov-2017 17:16:20.740 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server version:        Apache Tomcat (TomEE)/8.5.20 (7.0.4)
+27-Nov-2017 17:16:20.750 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server built:          Aug 2 2017 21:35:49 UTC
+27-Nov-2017 17:16:20.752 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Server number:         8.5.20.0
+27-Nov-2017 17:16:20.752 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke OS Name:               Windows 10
+27-Nov-2017 17:16:20.752 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke OS Version:            10.0
+27-Nov-2017 17:16:20.753 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Architecture:          amd64
+27-Nov-2017 17:16:20.753 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Java Home:             C:\Java\jdk1.8.0_144\jre
+27-Nov-2017 17:16:20.754 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke JVM Version:           1.8.0_144-b01
+27-Nov-2017 17:16:20.754 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke JVM Vendor:            Oracle Corporation
+27-Nov-2017 17:16:20.754 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke CATALINA_BASE:         E:\Projects\Java\Staiter\target\apache-tomee
+27-Nov-2017 17:16:20.754 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke CATALINA_HOME:         E:\Projects\Java\Staiter\target\apache-tomee
+27-Nov-2017 17:16:20.755 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -XX:+HeapDumpOnOutOfMemoryError
+27-Nov-2017 17:16:20.756 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dorg.apache.catalina.STRICT_SERVLET_COMPLIANCE=false
+27-Nov-2017 17:16:20.758 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dopenejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager
+27-Nov-2017 17:16:20.759 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dtomee.remote.support=true
+27-Nov-2017 17:16:20.764 INFO [main] sun.reflect.NativeMethodAccessorImpl.invoke Command line argument: -Dtomee.jsp-development=true
+27-Nov-2017 17:16:20.765 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.config.file=E:\projects\java\staiter\target\apache-tomee\conf\logging.properties
+27-Nov-2017 17:16:20.766 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -javaagent:E:\projects\java\staiter\target\apache-tomee\lib\openejb-javaagent.jar
+27-Nov-2017 17:16:20.766 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+27-Nov-2017 17:16:20.767 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Djava.io.tmpdir=E:\projects\java\staiter\target\apache-tomee\temp
+27-Nov-2017 17:16:20.767 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.base=E:\projects\java\staiter\target\apache-tomee
+27-Nov-2017 17:16:20.769 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.home=E:\projects\java\staiter\target\apache-tomee
+27-Nov-2017 17:16:20.770 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dcatalina.ext.dirs=E:\projects\java\staiter\target\apache-tomee\lib
+27-Nov-2017 17:16:20.770 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -Dorg.apache.tomcat.util.http.ServerCookie.ALLOW_HTTP_SEPARATORS_IN_V0=true
+27-Nov-2017 17:16:20.771 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Command line argument: -ea
+27-Nov-2017 17:16:20.772 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Java\jdk1.8.0_144\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\Bren\bin;C:\Git\mingw64\bin;C:\Git\usr\local\bin;C:\Git\usr\bin;C:\Git\usr\bin;C:\Git\mingw64\bin;C:\Git\usr\bin;C:\Users\Bren\bin;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\xampp\php;C:\apache-maven-3.5.0\bin;C:\Git\cmd;C:\OpenVPN\bin;C:\Fiddler;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Git\usr\bin\vendor_perl;C:\Git\usr\bin\core_perl;.]
+27-Nov-2017 17:16:21.170 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initializing ProtocolHandler ["http-nio-8080"]
+27-Nov-2017 17:16:21.580 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Using a shared selector for servlet write/read
+27-Nov-2017 17:16:21.585 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initializing ProtocolHandler ["ajp-nio-8009"]
+27-Nov-2017 17:16:21.590 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Using a shared selector for servlet write/read
+27-Nov-2017 17:16:22.356 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'tomee.remote.support=true'
+27-Nov-2017 17:16:22.379 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.jdbc.datasource-creator=org.apache.tomee.jdbc.TomEEDataSourceCreator'
+27-Nov-2017 17:16:22.691 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+27-Nov-2017 17:16:22.692 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> OpenEJB http://tomee.apache.org/
+27-Nov-2017 17:16:22.692 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Startup: Mon Nov 27 17:16:22 ART 2017
+27-Nov-2017 17:16:22.693 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Copyright 1999-2017 (C) Apache OpenEJB Project, All Rights Reserved.
+27-Nov-2017 17:16:22.693 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Version: 7.0.4
+27-Nov-2017 17:16:22.693 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Build date: 20170926
+27-Nov-2017 17:16:22.693 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> Build time: 12:10
+27-Nov-2017 17:16:22.693 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> ********************************************************************************
+27-Nov-2017 17:16:22.694 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.home = E:\Projects\Java\Staiter\target\apache-tomee
+27-Nov-2017 17:16:22.694 INFO [main] org.apache.openejb.OpenEJB$Instance.<init> openejb.base = E:\Projects\Java\Staiter\target\apache-tomee
+27-Nov-2017 17:16:22.698 INFO [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Created new singletonService org.apache.openejb.cdi.ThreadSingletonServiceImpl@6b4a4e18
+27-Nov-2017 17:16:22.699 INFO [main] org.apache.openejb.cdi.CdiBuilder.initializeOWB Succeeded in installing singleton service
+27-Nov-2017 17:16:22.802 INFO [main] org.apache.openejb.config.ConfigurationFactory.init TomEE configuration file is 'E:\Projects\Java\Staiter\target\apache-tomee\conf\tomee.xml'
+27-Nov-2017 17:16:22.932 INFO [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Tomcat Security Service, type=SecurityService, provider-id=Tomcat Security Service)
+27-Nov-2017 17:16:22.935 INFO [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Transaction Manager, type=TransactionManager, provider-id=Default Transaction Manager)
+27-Nov-2017 17:16:22.937 INFO [main] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=StaiterDB, type=Resource, provider-id=Default JDBC Database)
+27-Nov-2017 17:16:22.941 INFO [main] org.apache.openejb.util.OptionsLog.info Using 'openejb.deployments.classpath=false'
+27-Nov-2017 17:16:22.946 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating TransactionManager(id=Default Transaction Manager)
+27-Nov-2017 17:16:23.057 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating SecurityService(id=Tomcat Security Service)
+27-Nov-2017 17:16:23.125 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=StaiterDB)
+27-Nov-2017 17:16:24.145 INFO [main] org.apache.openejb.server.ServiceManager.initServer Creating ServerService(id=cxf-rs)
+27-Nov-2017 17:16:24.662 INFO [main] org.apache.openejb.server.SimpleServiceManager.start   ** Bound Services **
+27-Nov-2017 17:16:24.662 INFO [main] org.apache.openejb.server.SimpleServiceManager.printRow   NAME                 IP              PORT  
+27-Nov-2017 17:16:24.663 INFO [main] org.apache.openejb.server.SimpleServiceManager.start -------
+27-Nov-2017 17:16:24.663 INFO [main] org.apache.openejb.server.SimpleServiceManager.start Ready!
+27-Nov-2017 17:16:24.664 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Initialization processed in 5029 ms
+27-Nov-2017 17:16:24.730 INFO [main] org.apache.tomee.catalina.OpenEJBNamingContextListener.bindResource Importing a Tomcat Resource with id 'UserDatabase' of type 'org.apache.catalina.UserDatabase'.
+27-Nov-2017 17:16:24.731 INFO [main] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=UserDatabase)
+27-Nov-2017 17:16:24.734 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting service [Catalina]
+27-Nov-2017 17:16:24.734 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting Servlet Engine: Apache Tomcat (TomEE)/8.5.20 (7.0.4)
+27-Nov-2017 17:16:24.786 INFO [localhost-startStop-1] sun.reflect.DelegatingMethodAccessorImpl.invoke Deploying web application archive [E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT.war]
+27-Nov-2017 17:16:24.806 INFO [localhost-startStop-1] org.apache.tomee.catalina.TomcatWebAppBuilder.init ------------------------- localhost -> /
+27-Nov-2017 17:16:24.809 INFO [localhost-startStop-1] org.apache.openejb.util.JarExtractor.extract Extracting jar: E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT.war
+27-Nov-2017 17:16:28.002 INFO [localhost-startStop-1] org.apache.openejb.util.JarExtractor.extract Extracted path: E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT
+27-Nov-2017 17:16:28.003 INFO [localhost-startStop-1] org.apache.openejb.util.OptionsLog.info Using 'openejb.session.manager=org.apache.tomee.catalina.session.QuickSessionManager'
+27-Nov-2017 17:16:28.719 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureApplication Configuring enterprise application: E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT
+27-Nov-2017 17:16:29.029 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb PostController: EjbDeployment(deployment-id=PostController)
+27-Nov-2017 17:16:29.029 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb ImageController: EjbDeployment(deployment-id=ImageController)
+27-Nov-2017 17:16:29.029 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb UserController: EjbDeployment(deployment-id=UserController)
+27-Nov-2017 17:16:29.029 INFO [localhost-startStop-1] org.apache.openejb.config.InitEjbDeployments.deploy Auto-deploying ejb CommentController: EjbDeployment(deployment-id=CommentController)
+27-Nov-2017 17:16:29.036 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Stateless Container, type=Container, provider-id=Default Stateless Container)
+27-Nov-2017 17:16:29.037 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.createContainer Auto-creating a container for bean PostController: Container(type=STATELESS, id=Default Stateless Container)
+27-Nov-2017 17:16:29.037 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Container(id=Default Stateless Container)
+27-Nov-2017 17:16:29.067 INFO [localhost-startStop-1] org.apache.openejb.config.ConfigurationFactory.configureService Configuring Service(id=Default Managed Container, type=Container, provider-id=Default Managed Container)
+27-Nov-2017 17:16:29.068 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.createContainer Auto-creating a container for bean .Comp594825259: Container(type=MANAGED, id=Default Managed Container)
+27-Nov-2017 17:16:29.068 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Container(id=Default Managed Container)
+27-Nov-2017 17:16:29.083 INFO [localhost-startStop-1] org.apache.openejb.core.managed.SimplePassivater.init Using directory E:\projects\java\staiter\target\apache-tomee\temp for stateful session passivation
+27-Nov-2017 17:16:29.107 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.deploy Configuring PersistenceUnit(name=staiter-pu)
+27-Nov-2017 17:16:29.109 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.logAutoCreateResource Auto-creating a Resource with id 'StaiterDBNonJta' of type 'DataSource for 'staiter-pu'.
+27-Nov-2017 17:16:29.109 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.deploy Configuring Service(id=StaiterDBNonJta, type=Resource, provider-id=StaiterDB)
+27-Nov-2017 17:16:29.109 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createRecipe Creating Resource(id=StaiterDBNonJta)
+27-Nov-2017 17:16:29.783 INFO [localhost-startStop-1] org.apache.openejb.config.AutoConfig.setNonJtaDataSource Adjusting PersistenceUnit staiter-pu <non-jta-data-source> to Resource ID 'StaiterDBNonJta' from 'null'
+27-Nov-2017 17:16:29.827 INFO [localhost-startStop-1] org.apache.openejb.config.AppInfoBuilder.build Enterprise application "E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT" loaded.
+27-Nov-2017 17:16:29.835 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createApplication Assembling app: E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT
+27-Nov-2017 17:16:30.434 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.ReloadableEntityManagerFactory.createDelegate PersistenceUnit(name=staiter-pu, provider=org.apache.openjpa.persistence.PersistenceProviderImpl) - provider time 555ms
+27-Nov-2017 17:16:30.562 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=PostControllerLocalBean) --> Ejb(deployment-id=PostController)
+27-Nov-2017 17:16:30.562 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/PostController!controller.PostController) --> Ejb(deployment-id=PostController)
+27-Nov-2017 17:16:30.564 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/PostController) --> Ejb(deployment-id=PostController)
+27-Nov-2017 17:16:30.566 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=ImageControllerLocalBean) --> Ejb(deployment-id=ImageController)
+27-Nov-2017 17:16:30.567 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/ImageController!controller.ImageController) --> Ejb(deployment-id=ImageController)
+27-Nov-2017 17:16:30.568 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/ImageController) --> Ejb(deployment-id=ImageController)
+27-Nov-2017 17:16:30.568 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=UserControllerLocalBean) --> Ejb(deployment-id=UserController)
+27-Nov-2017 17:16:30.569 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/UserController!controller.UserController) --> Ejb(deployment-id=UserController)
+27-Nov-2017 17:16:30.569 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/UserController) --> Ejb(deployment-id=UserController)
+27-Nov-2017 17:16:30.570 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=CommentControllerLocalBean) --> Ejb(deployment-id=CommentController)
+27-Nov-2017 17:16:30.571 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/CommentController!controller.CommentController) --> Ejb(deployment-id=CommentController)
+27-Nov-2017 17:16:30.572 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.JndiBuilder.bind Jndi(name=global/CommentController) --> Ejb(deployment-id=CommentController)
+27-Nov-2017 17:16:30.633 INFO [localhost-startStop-1] org.apache.openejb.cdi.CdiBuilder.initSingleton Existing thread singleton service in SystemInstance(): org.apache.openejb.cdi.ThreadSingletonServiceImpl@6b4a4e18
+27-Nov-2017 17:16:30.785 INFO [localhost-startStop-1] org.apache.openejb.cdi.OpenEJBLifecycle.startApplication OpenWebBeans Container is starting...
+27-Nov-2017 17:16:30.797 INFO [localhost-startStop-1] org.apache.webbeans.plugins.PluginLoader.startUp Adding OpenWebBeansPlugin : [CdiPlugin]
+27-Nov-2017 17:16:31.393 INFO [localhost-startStop-1] org.apache.webbeans.config.BeansDeployer.validateInjectionPoints All injection points were validated successfully.
+27-Nov-2017 17:16:31.401 INFO [localhost-startStop-1] org.apache.openejb.cdi.OpenEJBLifecycle.startApplication OpenWebBeans Container has started, it took 616 ms.
+27-Nov-2017 17:16:31.404 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=PostController, ejb-name=PostController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.408 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=UserController, ejb-name=UserController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.409 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=CommentController, ejb-name=CommentController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.409 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Created Ejb(deployment-id=ImageController, ejb-name=ImageController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.439 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=PostController, ejb-name=PostController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.447 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=UserController, ejb-name=UserController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.459 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=CommentController, ejb-name=CommentController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.468 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.startEjbs Started Ejb(deployment-id=ImageController, ejb-name=ImageController, container=Default Stateless Container)
+27-Nov-2017 17:16:31.479 INFO [localhost-startStop-1] org.apache.openejb.assembler.classic.Assembler.createApplication Deployed Application(path=E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT)
+27-Nov-2017 17:16:31.854 INFO [localhost-startStop-1] org.apache.tomee.myfaces.TomEEMyFacesContainerInitializer.addListener Installing <listener>org.apache.myfaces.webapp.StartupServletContextListener</listener>
+27-Nov-2017 17:16:32.008 INFO [localhost-startStop-1] org.apache.myfaces.config.DefaultFacesConfigurationProvider.getStandardFacesConfig Reading standard config META-INF/standard-faces-config.xml
+27-Nov-2017 17:16:32.479 INFO [localhost-startStop-1] org.apache.myfaces.config.DefaultFacesConfigurationProvider.getWebAppFacesConfig Reading config /WEB-INF/faces-config.xml
+27-Nov-2017 17:16:32.657 INFO [localhost-startStop-1] org.apache.myfaces.config.DefaultFacesConfigurationProvider.getClassloaderFacesConfig Reading config : jar:file:/E:/Projects/Java/Staiter/target/apache-tomee/lib/openwebbeans-el22-1.7.4.jar!/META-INF/faces-config.xml
+27-Nov-2017 17:16:32.660 INFO [localhost-startStop-1] org.apache.myfaces.config.DefaultFacesConfigurationProvider.getClassloaderFacesConfig Reading config : jar:file:/E:/Projects/Java/Staiter/target/apache-tomee/lib/openwebbeans-jsf-1.7.4.jar!/META-INF/faces-config.xml
+27-Nov-2017 17:16:33.151 INFO [localhost-startStop-1] org.apache.myfaces.config.LogMetaInfUtils.logArtifact Artifact 'myfaces-api' was found in version '2.2.12' from path 'file:/E:/Projects/Java/Staiter/target/apache-tomee/lib/myfaces-api-2.2.12.jar'
+27-Nov-2017 17:16:33.151 INFO [localhost-startStop-1] org.apache.myfaces.config.LogMetaInfUtils.logArtifact Artifact 'myfaces-impl' was found in version '2.2.12' from path 'file:/E:/Projects/Java/Staiter/target/apache-tomee/lib/myfaces-impl-2.2.12.jar'
+27-Nov-2017 17:16:33.237 INFO [localhost-startStop-1] org.apache.myfaces.util.ExternalSpecifications.isCDIAvailable MyFaces CDI support enabled
+27-Nov-2017 17:16:33.242 INFO [localhost-startStop-1] org.apache.myfaces.spi.impl.DefaultInjectionProviderFactory.getInjectionProvider Using InjectionProvider org.apache.myfaces.spi.impl.CDIAnnotationDelegateInjectionProvider
+27-Nov-2017 17:16:33.423 INFO [localhost-startStop-1] org.apache.myfaces.util.ExternalSpecifications.isBeanValidationAvailable MyFaces Bean Validation support enabled
+27-Nov-2017 17:16:33.560 INFO [localhost-startStop-1] org.apache.myfaces.application.ApplicationImpl.getProjectStage Couldn't discover the current project stage, using Production
+27-Nov-2017 17:16:33.562 INFO [localhost-startStop-1] org.apache.myfaces.config.FacesConfigurator.handleSerialFactory Serialization provider : class org.apache.myfaces.shared_impl.util.serial.DefaultSerialFactory
+27-Nov-2017 17:16:33.589 INFO [localhost-startStop-1] org.apache.myfaces.config.annotation.DefaultLifecycleProviderFactory.getLifecycleProvider Using LifecycleProvider org.apache.myfaces.config.annotation.Tomcat7AnnotationLifecycleProvider
+27-Nov-2017 17:16:34.521 INFO [localhost-startStop-1] org.apache.myfaces.webapp.AbstractFacesInitializer.initFaces ServletContext initialized.
+27-Nov-2017 17:16:34.533 INFO [localhost-startStop-1] org.apache.myfaces.util.ExternalSpecifications.isUnifiedELAvailable MyFaces Unified EL support enabled
+27-Nov-2017 17:16:34.543 INFO [localhost-startStop-1] org.apache.myfaces.view.facelets.ViewPoolProcessor.initialize org.apache.myfaces.CACHE_EL_EXPRESSIONS web config parameter is set to "noCache". To enable view pooling this param must be set to "alwaysRecompile". View Pooling disabled.
+27-Nov-2017 17:16:34.631 INFO [localhost-startStop-1] org.apache.myfaces.webapp.StartupServletContextListener.contextInitialized MyFaces Core has started, it took [2760] ms.
+27-Nov-2017 17:16:34.747 SEVERE [localhost-startStop-1] org.apache.catalina.session.StandardManager.startInternal Exception loading sessions from persistent storage
+ java.lang.ClassCastException: java.lang.String cannot be cast to java.io.ObjectStreamClass
+	at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:1707)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2000)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1535)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:422)
+	at java.util.ArrayList.readObject(ArrayList.java:791)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at java.io.ObjectStreamClass.invokeReadObject(ObjectStreamClass.java:1058)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2136)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2027)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1535)
+	at java.io.ObjectInputStream.defaultReadFields(ObjectInputStream.java:2245)
+	at java.io.ObjectInputStream.readSerialData(ObjectInputStream.java:2169)
+	at java.io.ObjectInputStream.readOrdinaryObject(ObjectInputStream.java:2027)
+	at java.io.ObjectInputStream.readObject0(ObjectInputStream.java:1535)
+	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:422)
+	at org.apache.catalina.session.StandardSession.doReadObject(StandardSession.java:1611)
+	at org.apache.catalina.session.StandardSession.readObjectData(StandardSession.java:1077)
+	at org.apache.catalina.session.StandardManager.doLoad(StandardManager.java:218)
+	at org.apache.catalina.session.StandardManager.load(StandardManager.java:162)
+	at org.apache.catalina.session.StandardManager.startInternal(StandardManager.java:356)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5224)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:752)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:728)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:734)
+	at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:988)
+	at org.apache.catalina.startup.HostConfig$DeployWar.run(HostConfig.java:1860)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+27-Nov-2017 17:16:34.921 INFO [localhost-startStop-1] sun.reflect.DelegatingMethodAccessorImpl.invoke Deployment of web application archive [E:\Projects\Java\Staiter\target\apache-tomee\webapps\ROOT.war] has finished in [10,133] ms
+27-Nov-2017 17:16:34.949 INFO [Catalina-startStop-1] org.apache.catalina.core.StandardContext.setClassLoaderProperty Unable to set the web application class loader property [clearReferencesRmiTargets] to [true] as the property does not exist.
+27-Nov-2017 17:16:35.008 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting ProtocolHandler ["http-nio-8080"]
+27-Nov-2017 17:16:35.034 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Starting ProtocolHandler ["ajp-nio-8009"]
+27-Nov-2017 17:16:35.048 INFO [main] sun.reflect.DelegatingMethodAccessorImpl.invoke Server startup in 10382 ms
+27-Nov-2017 17:16:40.315 INFO [http-nio-8080-exec-2] org.apache.myfaces.el.unified.ResolverBuilderBase.sortELResolvers Chain of EL resolvers for JSP sorted with: org.apache.myfaces.el.unified.OpenWebBeansELResolverComparator@3e5b2e2f and the result order is [org.apache.myfaces.el.unified.resolver.implicitobject.ImplicitObjectResolver@3a64bd3c, org.apache.myfaces.el.FlashELResolver@7f662414, org.apache.myfaces.el.unified.resolver.ManagedBeanResolver@299ea302, org.apache.myfaces.el.unified.resolver.ResourceBundleResolver@4ed3da48, org.apache.myfaces.el.unified.resolver.ResourceResolver@51c103f3, org.apache.webbeans.el22.WebBeansELResolver@1f49db5b, org.apache.myfaces.el.convert.VariableResolverToELResolver@4313ed03, org.apache.myfaces.el.convert.PropertyResolverToELResolver@13c26eb3]
+27-Nov-2017 17:16:40.529 INFO [http-nio-8080-exec-2] org.apache.myfaces.el.unified.ResolverBuilderBase.sortELResolvers Chain of EL resolvers for Faces sorted with: org.apache.myfaces.el.unified.OpenWebBeansELResolverComparator@3e5b2e2f and the result order is [org.apache.myfaces.el.unified.resolver.implicitobject.ImplicitObjectResolver@4ac529a3, org.apache.myfaces.el.unified.resolver.CompositeComponentELResolver@1b07a0a3, org.apache.webbeans.el22.WebBeansELResolver@1f49db5b, org.apache.myfaces.el.convert.VariableResolverToELResolver@47203d35, org.apache.myfaces.el.convert.PropertyResolverToELResolver@47976494, org.apache.myfaces.el.FlashELResolver@24fcc5f4, org.apache.myfaces.el.unified.resolver.ManagedBeanResolver@2587b70, org.apache.myfaces.el.unified.resolver.ResourceResolver@4457379b, javax.el.ResourceBundleELResolver@38984841, org.apache.myfaces.el.unified.resolver.ResourceBundleResolver@7a89f9c3, org.apache.el.stream.StreamELResolverImpl@3b4b9e19, javax.el.StaticFieldELResolver@465d8d04, javax.el.MapELResolver@3c7d1fce, javax.el.ListELResolver@98fae63, javax.el.ArrayELResolver@6ed3421d, javax.el.BeanELResolver@444cc76e]
+27-Nov-2017 17:16:40.896 INFO [http-nio-8080-exec-2] javax.faces.component._ExternalSpecifications.isBeanValidationAvailable MyFaces Bean Validation support enabled
