@@ -1,12 +1,18 @@
 package model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +27,16 @@ public class Post {
     
     @ManyToOne
 	private User user;
+    
+    @ManyToMany(cascade = { 
+    	    CascadeType.PERSIST, 
+    	    CascadeType.MERGE
+    	})
+    	@JoinTable(name = "post_likes",
+    	    joinColumns = @JoinColumn(name = "post_id"),
+    	    inverseJoinColumns = @JoinColumn(name = "user_id")
+    	)
+    	private Set<User> usersLikes = new HashSet<>();
     
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -96,7 +112,34 @@ public class Post {
 			return false;
 		}
 	}
+	
+	public void addLike(User user){
+		this.usersLikes.add(user);
+		user.getPostsLikes().add(this);
+	}
+	
+	public void removeLike(User user){
+		this.usersLikes.remove(user);
+		user.getPostsLikes().remove(this);
+	}
 
+	public Set<User> getUsersLikes() {
+		return usersLikes;
+	}
+
+	public void setUsersLikes(Set<User> usersLikes) {
+		this.usersLikes = usersLikes;
+	}
 	
-	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post)) return false;
+        return ID > 0 && ID == (((Post) o).ID);
+    }
+ 
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 }

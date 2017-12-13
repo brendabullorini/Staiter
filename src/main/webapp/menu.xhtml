@@ -14,23 +14,23 @@
 	                    </button>
 	                </li>
 	                <li>
-	                    <h:outputLink value="index.xhtml" class="active">Home</h:outputLink>   
+	                    <h:outputLink value="newindex.xhtml" class="active">Home</h:outputLink>   
 	                </li>
 	                <li>                          
-	                    <h:outputLink value="login.xhtml" rendered="#{! loginMb.logged}">Ingresar</h:outputLink>                         
+	                    <h:outputLink value="login.xhtml" rendered="#{! authMb.logged}">Ingresar</h:outputLink>                         
 	                </li>
 	                <li>                          
-	                    <h:outputLink value="myposts.xhtml" rendered="#{loginMb.logged}">Mis posts</h:outputLink>                         
+	                    <h:outputLink value="myposts.xhtml" rendered="#{authMb.logged}">Mis posts</h:outputLink>                         
 	                </li>
 	                <li>                          
-	                    <h:outputLink value="myprofile.xhtml" rendered="#{loginMb.logged}">Mi perfil</h:outputLink>                         
+	                    <h:outputLink value="myprofile.xhtml" rendered="#{authMb.logged}">Mi perfil</h:outputLink>                         
 	                </li>
 	                <li>
-	                    <h:outputLink value="register.xhtml" rendered="#{! loginMb.logged}">Registrarme</h:outputLink>   	                    
+	                    <h:outputLink value="register.xhtml" rendered="#{! authMb.logged}">Registrarme</h:outputLink>   	                    
 	                </li>
 	                <li>
 	                	<h:form>
-	                		<h:commandLink action="#{loginMb.logout()}" rendered="#{loginMb.logged}">Salir</h:commandLink>
+	                		<h:commandLink action="#{loginMb.logout()}" rendered="#{authMb.logged}">Salir</h:commandLink>
 	                	</h:form>						
 	                </li>
 	            </ul>                    

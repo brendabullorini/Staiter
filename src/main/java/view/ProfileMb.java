@@ -7,6 +7,7 @@ import javax.inject.Named;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
+import auth.AuthMb;
 import model.Image;
 import model.User;
 import controller.ImageController;
@@ -26,7 +27,7 @@ public class ProfileMb {
 	ImageController imgController;
 	
 	@Inject
-	LoginMb loginMb;
+	AuthMb authMb;
 	
 	private String newUsername;
 	private String oldPassword;
@@ -40,11 +41,11 @@ public class ProfileMb {
 		
 		boolean errorCarga = false;
 						
-		user.setID(loginMb.getCurrentUser().getID());
-		user.setEmail(loginMb.getCurrentUser().getEmail());
+		user.setID(authMb.getCurrentUser().getID());
+		user.setEmail(authMb.getCurrentUser().getEmail());
 		
 		if(oldPassword.length() > 0 && newPassword.length() > 0){
-			if(userController.verify(loginMb.getCurrentUser().getEmail(), oldPassword) != null){
+			if(userController.verify(authMb.getCurrentUser().getEmail(), oldPassword) != null){
 				if(newPassword.equals(confirmPassword)){
 					user.setPassword(newPassword);
 				}else{					
@@ -58,7 +59,7 @@ public class ProfileMb {
 				errorCarga = true;
 			}
 		}else{			
-			user.setUserName(loginMb.getCurrentUser().getPassword());
+			user.setUserName(authMb.getCurrentUser().getPassword());
 		}
 		
 		if(newUsername.length() > 0){
@@ -70,7 +71,7 @@ public class ProfileMb {
 				errorCarga = true;
 			}
 		}else{
-			user.setUserName(loginMb.getCurrentUser().getUserName());
+			user.setUserName(authMb.getCurrentUser().getUserName());
 		}		
 		
 		if(file != null && file.getSize() > 0){
@@ -87,12 +88,12 @@ public class ProfileMb {
 				errorCarga = true;
 			}	
 		}else{
-			user.setImage(loginMb.getCurrentUser().getImage());
+			user.setImage(authMb.getCurrentUser().getImage());
 		}
 								
 		if(!errorCarga){
 			userController.update(user);
-			loginMb.setCurrentUser(user);
+			authMb.setCurrentUser(user);
 			return "index";
 		}else{
 			return null;

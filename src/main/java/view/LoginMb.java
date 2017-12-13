@@ -2,17 +2,16 @@ package view;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
-import model.User;
+import auth.AuthMb;
 import controller.UserController;
 
 @Named
-@SessionScoped
 public class LoginMb implements Serializable{
 	
 	private static final long serialVersionUID = -3411857293915149484L;
@@ -20,19 +19,20 @@ public class LoginMb implements Serializable{
 	@Inject
 	UserController userController;
 	
-	private User user = new User();
-
-	private User currentUser;
+	@Inject
+	private AuthMb authMb;
 	
-	public boolean isLogged(){
-		return currentUser != null;
-	}
+	@NotNull
+	private String username;
+	
+	@NotNull
+	private String password;
 	
 	public String login(){
-		if(user.getEmail() != null && user.getPassword() != null){
-			currentUser = userController.verify(user.getEmail(), user.getPassword());		
-			if(isLogged()){
-				return "index?faces-redirect=true";
+		if(username != null && password != null){
+			authMb.setCurrentUser(userController.verify(username, password));
+			if(authMb.isLogged()){
+				return "newindex?faces-redirect=true";
 			}else {				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
 				FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -45,27 +45,26 @@ public class LoginMb implements Serializable{
 	}
 	
 	public String logout(){
-		currentUser = null;
-		return "index";
-	}
-		
-	
-	public User getCurrentUser(){
-		return currentUser;
-	}
-	
-	public void setCurrentUser(User user){
-		this.currentUser = user;
-	}
-	
-	public User getUser() {
-		return user;
+		authMb.setCurrentUser(null);
+		return "newindex?faces-redirect=true";
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public String getUsername() {
+		return username;
 	}
-	
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+		
 	
 
 }

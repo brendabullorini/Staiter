@@ -7,15 +7,15 @@
 	<title>Staiter</title>
 	<ui:include src="style.xhtml"/>
 </h:head>
-<h:body>
+<h:body styleClass="bg-image" style="background-image: url('resources/img/photos/staiterbg.jpg');">
 	<div id="layout">
 		<div id="content">
 			<ui:insert name="content">
 		        <div class="content overflow-hidden">
 		            <div class="row">
 		                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-		                    <div class="block block-themed animated fadeIn">
-		                        <div class="block-header bg-primary">
+		                    <div class="block block-themed animated bounceIn">
+		                        <div class="block-header bg-flat-dark">
 		                            <ul class="block-options">
 		                                <li>
 		                                    <h:outputLink value="register.xhtml">Registrarme</h:outputLink>
@@ -24,33 +24,36 @@
 		                                	<h:outputLink value="register.xhtml"><i class="si si-plus"></i></h:outputLink>		                                   
 		                                </li>
 		                            </ul>
-		                            <h3 class="block-title">Ingreso</h3>
+		                            <h3 class="block-title">STAITER</h3>
 		                        </div>
 		                        <div class="block-content block-content-full block-content-narrow">
-		                            <h1 class="h2 font-w600 push-30-t push-5">Staiter</h1>
-		                            <p>Tu Twitter Davincero.</p>		
+			                        <div class="text-center push-15-t push-15">
+	                                	<img class="img-avatar img-avatar96" src="resources/img/avatars/ic_qsp.png" alt=""/>
+	                            	</div>
+		                            <!-- <h1 class="h2 font-w600 push-30-t push-5">Staiter</h1>-->
+		                            <!-- <p>Tu Twitter Davincero.</p> -->		
 		                            <h:form styleClass="js-validation-login form-horizontal push-30-t push-50" form="login_form" method="post">
 		                                <div class="form-group">
-		                                    <div class="col-xs-12">
-		                                        <div class="form-material form-material-primary floating">
-		                                            <h:inputText styleClass="form-control" label="Usuario" type="email" id="login-username" name="login-username" value="#{loginMb.user.email}"/>
+		                                    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+		                                        <div class="form-material form-material-primary">
+		                                            <h:inputText styleClass="form-control" label="Usuario" type="email" id="login-username" name="login-username" value="#{loginMb.username}"/>
 		                                            <label for="login-username">E-mail</label>
 		                                            <h:message id="msge_username" for="login-username" style="color:red"/>		                                            
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group">
-		                                    <div class="col-xs-12">
-		                                        <div class="form-material form-material-primary floating">
-		                                            <h:inputSecret styleClass="form-control" class="form-control" label="Password" type="password" id="login-password" name="login-password" value="#{loginMb.user.password}"/>
+		                                    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+		                                        <div class="form-material form-material-primary">
+		                                            <h:inputSecret styleClass="form-control" class="form-control" label="Password" type="password" id="login-password" name="login-password" value="#{loginMb.password}"/>
 		                                            <label for="login-password">Password</label>
 		                                            <h:message id="msge_password" for="login-password" style="color:red"/>
 		                                        </div>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group">
-		                                    <div class="col-xs-12 col-sm-6 col-md-4">                                        
-		                                        <h:commandLink action="#{loginMb.login()}" styleClass="btn btn-block btn-primary" id="btn_login">
+		                                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">                                        
+		                                        <h:commandLink action="#{loginMb.login()}" styleClass="btn btn-block btn-default" id="btn_login">
 		                                        	<i class="si si-login pull-right"></i>Entrar
 		                                        	<f:ajax render="msges_login msge_username msge_password" execute="@form"></f:ajax>
 		                                        </h:commandLink>

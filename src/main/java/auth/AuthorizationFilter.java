@@ -15,8 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import view.LoginMb;
-
+import auth.AuthMb;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = { "*.xhtml", "/" })
 public class AuthorizationFilter implements Filter {
@@ -27,11 +26,12 @@ public class AuthorizationFilter implements Filter {
 					"/index.xhtml",
 					"/register.xhtml",
 					"/login.xhtml",
+					"/newindex.xhtml",
 					".*\\.js.xhtml",
 					".*\\.css.xhtml");
 
 	@Inject
-	private LoginMb loginMb;
+	private AuthMb authMb;
 
 	public AuthorizationFilter() {
 	}
@@ -56,7 +56,7 @@ public class AuthorizationFilter implements Filter {
 
 			
 			//Si está logueado
-			if (loginMb != null && loginMb.isLogged()) {
+			if (authMb != null && authMb.isLogged()) {
 				chain.doFilter(request, response);
 				return;
 			}

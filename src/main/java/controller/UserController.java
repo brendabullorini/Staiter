@@ -5,10 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import model.Image;
 import model.User;
 
 @Stateless
@@ -24,8 +22,7 @@ public class UserController {
 			created = true;
 		}else{
 			created = false;
-		}		
-		
+		}				
 		return created;
 	}
 	
@@ -34,17 +31,14 @@ public class UserController {
 	}
 	
 	public boolean usernameExists(String username){
-		boolean exists = false;
-		
-    	String hql = "Select count(u) from User u where u.userName = :user";
-       	
+
+		boolean exists = false;		
+    	String hql = "Select count(u) from User u where u.userName = :user";       	
     	Long count = (Long) entityManager.createQuery(hql)
-    		       .setParameter("user", username).getSingleResult();
-    	 	
+    		       .setParameter("user", username).getSingleResult();    	 	
     	if(count > 0){
     		exists = true;
-    	}      
-		
+    	}      		
 		return exists;
 	}
 		

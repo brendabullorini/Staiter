@@ -1,3 +1,4 @@
+auth\AuthMb.class
 view\RegisterMb.class
 controller\CommentController.class
 auth\AuthorizationFilter.class
@@ -11,5 +12,6 @@ view\ProfileMb.class
 model\Image.class
 view\PostMb.class
 view\CommentMb.class
+view\SocialMb.class
 model\Comment.class
 model\User.class

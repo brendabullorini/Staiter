@@ -14,10 +14,10 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Nuevo post</h3>
 				</div>
-				<h:panelGroup layout="block" rendered="#{!loginMb.logged}">
+				<h:panelGroup layout="block" rendered="#{!authMb.logged}">
 					<h:outputText value="Inicia sesion para agregar nuevos posts." />
 				</h:panelGroup>
-				<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+				<h:panelGroup layout="block" rendered="#{authMb.logged}">
 					<h:inputText styleClass="form-control" value="#{postMb.content}" id="postContent"/>
 					<h:message for="postContent"></h:message>
 					<h:inputFile id="file" value="#{postMb.file}"/>
@@ -36,8 +36,7 @@
 						<h3 class="panel-title">	
 							<h:panelGroup id="imagen-profile">
 								<h:graphicImage rendered="#{p.user.hasProfileImage()}" styleClass="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" value="/image/#{p.user.image.path}"/>
-							</h:panelGroup>
-							<!-- <img src="/image/#{p.user.image.path}" class="img-avatar img-avatar96 img-avatar-thumb" style="width:60px" ></img> -->																						
+							</h:panelGroup>																												
 							<h:outputText value="#{p.user.userName}" />
 							<small> <h:outputText value="#{p.date}">
 									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
@@ -68,7 +67,7 @@
 										</li>
 									</ui:repeat>
 								</h:panelGroup>							
-								<h:panelGroup layout="block" rendered="#{loginMb.logged}">
+								<h:panelGroup layout="block" rendered="#{authMb.logged}">
 									<h:inputText value="#{commentMb.comment}" styleClass="form-control" />										
 									<h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
 									<f:ajax render="commentList" execute="@form"></f:ajax>

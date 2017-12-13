@@ -26,6 +26,19 @@ xmlns:h="http://java.sun.com/jsf/html">
   <h:outputScript library="js" name="core/js.cookie.min.js"/>
   <h:outputScript library="js" name="app.js"/>
   
+    <!-- Page JS Plugins -->
+  <script src="resources/js/plugins/magnific-popup/magnific-popup.min.js"></script>
+  <script src="resources/js/plugins/highlightjs/highlight.pack.js"></script>
+
+  <!-- Page JS Code -->
+  <script>
+      jQuery(function () {
+          // Init page helpers (Magnific Popup + Highlight.js plugin)
+          App.initHelpers(['magnific-popup', 'highlightjs']);
+      });
+  </script>
+  
+  
   <title><ui:insert name="title" /></title>	
 
 </h:head>

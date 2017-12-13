@@ -10,6 +10,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 import javax.validation.constraints.Size;
 
+import auth.AuthMb;
 import model.Image;
 import model.Post;
 import controller.ImageController;
@@ -31,7 +32,7 @@ public class PostMb{
 	private Part file;
 	
 	@Inject
-	LoginMb loginMb;
+	AuthMb authMb;
 	
 	@Size(min=1,max=140, message = "El post debe tener entre 1 y 140 caracteres.")
 	private String content;
@@ -43,7 +44,7 @@ public class PostMb{
 				if(file != null && file.getSize() > 0 && file.getContentType().startsWith("image/")){
 					img = imgCntl.upload(file);
 				}
-				Post post = new Post(loginMb.getCurrentUser(), content, img);
+				Post post = new Post(authMb.getCurrentUser(), content, img);
 				postController.createPost(post);
 				content = null;
 			} catch (Exception e){
@@ -62,7 +63,7 @@ public class PostMb{
 	}
 	
 	public List<Post> getPostsByUser(){
-		return postController.getByUser(loginMb.getCurrentUser().getID());
+		return postController.getByUser(authMb.getCurrentUser().getID());
 	}
 
 	public String getContent() {

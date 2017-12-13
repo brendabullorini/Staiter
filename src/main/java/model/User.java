@@ -1,10 +1,15 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 
@@ -30,10 +35,21 @@ public class User {
     @ManyToOne(fetch=FetchType.EAGER)
     private Image image;
     
+    @ManyToMany(mappedBy = "usersLikes")
+    private Set<Post> postsLikes = new HashSet<>();
+    
     public User(){
     	
     }
 		
+	public Set<Post> getPostsLikes() {
+		return postsLikes;
+	}
+
+	public void setPostsLikes(Set<Post> postsLikes) {
+		this.postsLikes = postsLikes;
+	}
+
 	public User(String email, String userName, String password) {
 		super();
 		this.email = email;
@@ -94,8 +110,19 @@ public class User {
 			return true;
 		}else{
 			return false;
-		}
-			
+		}			
 	}
-
+	
+   @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(ID, user.ID);
+    }
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }
