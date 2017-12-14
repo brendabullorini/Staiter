@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
@@ -38,10 +40,40 @@ public class User {
     @ManyToMany(mappedBy = "usersLikes")
     private Set<Post> postsLikes = new HashSet<>();
     
+    @ManyToMany
+    @JoinTable(name = "social_follows",
+    joinColumns = @JoinColumn(name = "follow_id"),
+    inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<User> followers = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name="social_follows",
+     joinColumns=@JoinColumn(name="user_id"),
+     inverseJoinColumns=@JoinColumn(name="follow_id")
+    )
+    private Set<User> follows = new HashSet<>();
+    
     public User(){
     	
     }
-		
+    
+	public Set<User> getFollowers() {
+		return followers;
+	}
+	
+	public void setFollowers(Set<User> followers) {
+		this.followers = followers;
+	}
+
+	public Set<User> getFollows() {
+		return follows;
+	}
+
+	public void setFollows(Set<User> follows) {
+		this.follows = follows;
+	}
+
 	public Set<Post> getPostsLikes() {
 		return postsLikes;
 	}
@@ -113,6 +145,16 @@ public class User {
 		}			
 	}
 	
+	public void addFollow(User user){
+		this.follows.add(user);
+		user.getFollows().add(this);
+	}
+	
+	public void removeFollow(User user){
+		this.follows.remove(user);
+		user.getFollows().remove(this);
+	}
+	
    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,4 +167,14 @@ public class User {
     public int hashCode() {
         return Objects.hash(ID);
     }
+
+	@Override
+	public String toString() {
+		return "User [ID=" + ID + ", email=" + email + ", userName=" + userName
+				+ ", password=" + password
+				+ ", followers=" + followers
+				+ ", follows=" + follows + "]";
+	}
+    
+    
 }

@@ -31,17 +31,14 @@ public class RegisterMb{
 	
 	public String add(){
 								
-		if(user.getEmail().length()>0 && user.getUserName().length()>0 && user.getPassword().length()>0){
-			
+		if(user.getEmail().length()>0 && user.getUserName().length()>0 && user.getPassword().length()>0){			
 			if(userController.userExists(user.getEmail())){
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"El e-mal ingresado ya existe.",null);
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 				return null;				
 			}else{
 				boolean created = false;
-				System.out.println("///////////////////////////////////////////////// EL FILE ESTA VACIO O QUE");
 				if(file != null && file.getSize() > 0){
-					System.out.println("///////////////////////////////////////////////// FILE CON ALGO");
 					try{
 						Image img = null;
 						if(file.getContentType().startsWith("image/")){
@@ -53,8 +50,6 @@ public class RegisterMb{
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo cargar la foto, reintente.", null);
 						FacesContext.getCurrentInstance().addMessage(null, msg);
 					}	
-				}else{
-					System.out.println("///////////////////////////////////////////////// FILE SIN NADA");
 				}
 				created = userController.createUser(user);
 				if(created){
@@ -62,12 +57,10 @@ public class RegisterMb{
 				}else{
 					return null;
 				}
-			}			
-	
+			}		
 		}else{
 			return null;
-		}
-	
+		}	
 	}
 
 	public User getUser() {

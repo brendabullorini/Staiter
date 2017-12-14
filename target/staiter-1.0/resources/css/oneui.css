@@ -5093,7 +5093,7 @@ a.list-group-item:focus {
 }
 #header-navbar {
   min-height: 60px;
-  background-color: #3e4a59;
+  background-color: #fff;
 }
 #header-navbar:before,
 #header-navbar:after {

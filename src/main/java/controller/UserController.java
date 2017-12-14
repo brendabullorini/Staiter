@@ -1,12 +1,15 @@
 package controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.Post;
 import model.User;
 
 @Stateless
@@ -46,6 +49,8 @@ public class UserController {
 		
 		User user = null;
 		User userDB = null;
+		
+		//TODO checkear por usuario y password, no solo usuario y despues password.
 		
     	String hql = "Select u from User u where u.email = :user";
 		TypedQuery<User> q = entityManager.createQuery(hql,User.class);
@@ -107,6 +112,53 @@ public class UserController {
     	}        
 		
 		return exists;
+	}
+	
+	public boolean alreadyFollowed(User followed, User user){
+		System.out.println("********** USER CONTROLLER ***********");
+		System.out.println("********** USER FOLLOWED: " + followed.getEmail());
+		System.out.println("********** USER LOGUEADO: " + user.getEmail());
+		boolean existe = false;
+		User userDB = entityManager.find(User.class, user.getID());
+		Set<User> follows = userDB.getFollows();
+		if(follows!=null){
+			for(User u : follows){
+				System.out.println("********** VERIFICIANDO FOLLOWER: " + u.getEmail());
+				if(u.getID() == followed.getID()){
+					System.out.println("********* FOLLOW ENCONTRADO");
+					existe = true;
+					break;
+				}
+			}
+		}
+		return existe;
+	}
+	
+	public void addFollow(User followed, User user){
+		Set<User> follows = getFollows(user);
+		if(follows==null)
+			follows = new HashSet<User>();
+		follows.add(followed);
+		user.setFollows(follows);
+		entityManager.merge(user);				
+	}
+	
+	public void removeFollow(User followed, User user){
+		Set<User> follows = getFollows(user);
+		if(follows==null)
+			follows = new HashSet<User>();
+		follows.remove(followed);
+		user.setFollows(follows);
+		entityManager.merge(user);				
+	}
+	
+	public Set<User> getFollows(User u){
+		User userDB = entityManager.find(User.class, u.getID());
+		if(userDB.getFollows()!=null){
+			return userDB.getFollows();
+		}else{
+			return null;
+		}
 	}
 
 }

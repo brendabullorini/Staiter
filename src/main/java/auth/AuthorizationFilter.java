@@ -55,7 +55,7 @@ public class AuthorizationFilter implements Filter {
 			 }
 
 			
-			//Si está logueado
+			//Si esta logueado
 			if (authMb != null && authMb.isLogged()) {
 				chain.doFilter(request, response);
 				return;

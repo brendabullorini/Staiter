@@ -51,9 +51,6 @@ public class PostController {
 		Set<User> likes = getLikes(p);
 		if(likes==null){
 			likes = new HashSet<User>();
-		}		
-		for(User like : likes){
-			System.out.println(like);
 		}
 		likes.remove(u);
 		p.setUsersLikes(likes);

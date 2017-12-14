@@ -4,45 +4,6 @@
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:h="http://java.sun.com/jsf/html" >
 <ui:composition>
-	<div class="side-scroll header-navbar-fixed">
-	    <header id="header-navbar" class="content-mini content-mini-full">
-	        <div class="content-boxed">
-	            <ul class="js-nav-main-header nav-main-header pull-right">
-	                <li class="hidden-md hidden-lg clearfix push-20">                            
-	                    <button class="btn btn-link text-white pull-right" data-toggle="class-toggle" data-target=".js-nav-main-header" data-class="nav-main-header-o" type="button">
-	                        <i class="fa fa-times"></i>
-	                    </button>
-	                </li>
-	                <li>
-	                    <h:outputLink value="newindex.xhtml" class="active">Home</h:outputLink>   
-	                </li>
-	                <li>                          
-	                    <h:outputLink value="login.xhtml" rendered="#{! authMb.logged}">Ingresar</h:outputLink>                         
-	                </li>
-	                <li>                          
-	                    <h:outputLink value="myposts.xhtml" rendered="#{authMb.logged}">Mis posts</h:outputLink>                         
-	                </li>
-	                <li>                          
-	                    <h:outputLink value="myprofile.xhtml" rendered="#{authMb.logged}">Mi perfil</h:outputLink>                         
-	                </li>
-	                <li>
-	                    <h:outputLink value="register.xhtml" rendered="#{! authMb.logged}">Registrarme</h:outputLink>   	                    
-	                </li>
-	                <li>
-	                	<h:form>
-	                		<h:commandLink action="#{loginMb.logout()}" rendered="#{authMb.logged}">Salir</h:commandLink>
-	                	</h:form>						
-	                </li>
-	            </ul>                    
-	            <ul class="nav-header pull-left">
-	                <li class="header-content">
-	                    <h:outputLink value="index.xhtml" class="h5">
-	                        <i class="fa fa-handshake-o text-primary"></i> <span class="h4 font-w600 text-white">staiter</span>
-	                    </h:outputLink>	           
-	                </li>
-	            </ul>                    
-	        </div>
-	    </header>
-	</div>
+
 </ui:composition>
 </html>

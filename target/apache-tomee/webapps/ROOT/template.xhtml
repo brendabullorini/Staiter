@@ -4,18 +4,125 @@
 xmlns:f="http://java.sun.com/jsf/core" 
 xmlns:h="http://java.sun.com/jsf/html">
 	 
-<ui:include src="style.xhtml"/>
+<h:head>
+	<ui:include src="style.xhtml"/>
+</h:head>
 <h:body>
-	<div id="layout">
-		<nav id="header">
-			<ui:include src="menu.xhtml"/>
-		</nav>	
-		<h:panelGroup layout="block" styleClass="content">
-		<h:messages id="mensajes" globalOnly="true" errorClass="alert alert-danger"/>		
-			<ui:insert name="content">
-				<span>Pagina en construccion</span>
-			</ui:insert>			
-		</h:panelGroup>
+	<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+		<nav id="sidebar">
+		   <div id="sidebar-scroll">
+			   <div class="sidebar-content">
+				   <div class="side-header side-content bg-white-op">
+					   <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+						   <i class="fa fa-times"></i>
+					   </button>
+					   <a class="h5 text-white" href="index.html">
+						   <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">Staiter</span>
+					   </a>
+				   </div>
+				   <div class="side-content side-content-full">
+					   <ul class="nav-main">
+						   <li>							   
+							   <h:outputLink value="newindex.xhtml" class="active"><i class="si si-bubbles"></i><span class="sidebar-mini-hide">Ver todo</span></h:outputLink>
+						   </li>
+						   <ui:fragment rendered="#{authMb.logged}">	
+						   <li>
+						   	   <h:outputLink value="myposts.xhtml"><i class="si si-emoticon-smile"></i><span class="sidebar-mini-hide">Mis posts</span></h:outputLink>						   							   
+						   </li>
+						   <li>
+						   	   <h:outputLink value="newindex.xhtml"><i class="si si-heart"></i><span class="sidebar-mini-hide">Siguiendo</span></h:outputLink>							   
+						   </li>
+						   <li>							   
+							   <h:outputLink value="newindex.xhtml"><i class="si si-eye"></i><span class="sidebar-mini-hide">Quien me sigue</span></h:outputLink>
+						   </li>
+						   <li>	
+						   	   <h:form>						   
+							   <h:commandLink action="#{loginMb.logout()}"><i class="si si-logout"></i><span class="sidebar-mini-hide">Salir</span></h:commandLink>
+							   </h:form>
+						   </li>
+						   </ui:fragment>						   
+						   <ui:fragment rendered="#{!authMb.logged}">	
+						   <li>							   
+							   <h:outputLink value="login.xhtml"><i class="si si-login"></i><span class="sidebar-mini-hide">Iniciar sesion</span></h:outputLink>
+						   </li>
+						   <li>							   
+							   <h:outputLink value="register.xhtml"><i class="si si-like"></i><span class="sidebar-mini-hide">Registrarme</span></h:outputLink>
+						   </li>
+						   <li>							   
+							   <h:outputLink value="newindex.xhtml"><i class="si si-info"></i><span class="sidebar-mini-hide">Contacto</span></h:outputLink>
+						   </li>
+						   </ui:fragment>                                 
+					   </ul>
+				   </div>
+			   </div>
+		   </div>
+		  </nav>
+		<header id="header-navbar" class="content-mini content-mini-full">
+			<ui:fragment rendered="#{authMb.logged}">			
+			<ul class="nav-header pull-right">
+				<li>
+					<div class="btn-group">
+						<button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
+							<img src="resources/img/avatars/avatar10.jpg" alt="Avatar"/>							
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li class="dropdown-header">Mi perfil</li>
+							<li>
+								<h:outputLink tabindex="-1" value="myprofile.xhtml">
+									<i class="si si-user pull-right"></i>Editar
+								</h:outputLink>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Acciones</li>
+							<li>								
+								<h:commandLink tabindex="-1" action="#{loginMb.logout()}">
+									<i class="si si-logout pull-right"></i>Salir
+								</h:commandLink>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+				</li>
+			</ul>
+			</ui:fragment>
+			<ul class="nav-header pull-left">
+				<li class="hidden-md hidden-lg">
+					<button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle" type="button">
+						<i class="fa fa-navicon"></i>
+					</button>
+				</li>
+				<li class="hidden-xs hidden-sm">
+					<button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
+						<i class="fa fa-ellipsis-v"></i>
+					</button>
+				</li>
+				<li>
+				</li>
+				<li class="visible-xs">
+					<button class="btn btn-default" data-toggle="class-toggle" data-target=".js-header-search" data-class="header-search-xs-visible" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</li>
+				<li class="js-header-search header-search">
+					<form class="form-horizontal" action="base_pages_search.html" method="post">
+						<div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
+							<input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Buscar usuario..."/>
+							<span class="input-group-addon"><i class="si si-magnifier"></i></span>
+						</div>
+					</form>
+				</li>
+			</ul>
+		</header>		
+		<main id="main-container">
+			<h:panelGroup layout="block" styleClass="content">
+			<h:messages id="mensajes" globalOnly="true" errorClass="alert alert-danger"/>		
+				<ui:insert name="content">
+					<span>Pagina en construccion</span>
+				</ui:insert>			
+			</h:panelGroup>
+		</main>
 	</div>
 </h:body>
 </html>
