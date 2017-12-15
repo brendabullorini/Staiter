@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Set;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -47,5 +49,13 @@ public class SocialMb {
 	
 	public boolean alreadyFollowed(User followed){
 		return userCtrl.alreadyFollowed(followed, authMb.getCurrentUser());		
+	}
+	
+	public Set<User> getFollowing(){
+		return userCtrl.getFollowing(authMb.getCurrentUser());
+	}
+	
+	public boolean isFollowingMe(User following){
+		return userCtrl.isFollowingMe(following, authMb.getCurrentUser());
 	}
 }

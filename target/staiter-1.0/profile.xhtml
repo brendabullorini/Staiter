@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="template.xhtml">
+	 <ui:define name="metadata">
+		<f:metadata>
+		    <f:viewParam name="id" value="#{profileMb.id}"/>
+		    <f:viewAction action="#{profileMb.loadData}" />
+		</f:metadata>
+	 </ui:define>
+	 <ui:define name="title">
+		Bienvenido al nuevo Staiter
+	 </ui:define>
+	 <ui:define name="content" styleClass="content bg-gray-lighter">
+	 Lo que llego <h:outputText>#{profileMb.user.userName}</h:outputText> 
+	 </ui:define>
+</ui:composition>
+</html>

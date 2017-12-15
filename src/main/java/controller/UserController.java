@@ -7,9 +7,9 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import model.Post;
 import model.User;
 
 @Stateless
@@ -33,7 +33,20 @@ public class UserController {
 		entityManager.merge(user);
 	}
 	
+	public User getById(int id){
+		try{
+	    	String hql = "Select u from User u where u.ID = :id";
+			TypedQuery<User> q = entityManager.createQuery(hql,User.class);
+			q.setParameter("id", id);
+			return q.getSingleResult();
+		}catch (PersistenceException e){
+			return null;
+		}
+	}
+	
 	public boolean usernameExists(String username){
+		
+		//TODO cambiar los longs
 
 		boolean exists = false;		
     	String hql = "Select count(u) from User u where u.userName = :user";       	
@@ -115,17 +128,12 @@ public class UserController {
 	}
 	
 	public boolean alreadyFollowed(User followed, User user){
-		System.out.println("********** USER CONTROLLER ***********");
-		System.out.println("********** USER FOLLOWED: " + followed.getEmail());
-		System.out.println("********** USER LOGUEADO: " + user.getEmail());
 		boolean existe = false;
 		User userDB = entityManager.find(User.class, user.getID());
-		Set<User> follows = userDB.getFollows();
-		if(follows!=null){
-			for(User u : follows){
-				System.out.println("********** VERIFICIANDO FOLLOWER: " + u.getEmail());
+		Set<User> following = userDB.getFollowing();
+		if(following!=null){
+			for(User u : following){
 				if(u.getID() == followed.getID()){
-					System.out.println("********* FOLLOW ENCONTRADO");
 					existe = true;
 					break;
 				}
@@ -135,30 +143,44 @@ public class UserController {
 	}
 	
 	public void addFollow(User followed, User user){
-		Set<User> follows = getFollows(user);
-		if(follows==null)
-			follows = new HashSet<User>();
-		follows.add(followed);
-		user.setFollows(follows);
+		Set<User> following = getFollowing(user);
+		if(following==null)
+			following = new HashSet<User>();
+		following.add(followed);
+		user.setFollowing(following);
 		entityManager.merge(user);				
 	}
 	
 	public void removeFollow(User followed, User user){
-		Set<User> follows = getFollows(user);
-		if(follows==null)
-			follows = new HashSet<User>();
-		follows.remove(followed);
-		user.setFollows(follows);
+		Set<User> following = getFollowing(user);
+		if(following==null)
+			following = new HashSet<User>();
+		following.remove(followed);
+		user.setFollowing(following);
 		entityManager.merge(user);				
 	}
 	
-	public Set<User> getFollows(User u){
+	public Set<User> getFollowing(User u){
 		User userDB = entityManager.find(User.class, u.getID());
-		if(userDB.getFollows()!=null){
-			return userDB.getFollows();
+		if(userDB.getFollowing()!=null){
+			return userDB.getFollowing();
 		}else{
 			return null;
 		}
+	}
+	
+	public boolean isFollowingMe(User f, User u){
+		boolean following = false;
+		User userDB = entityManager.find(User.class, f.getID());
+		if(userDB.getFollowing()!=null){
+			for(User uf : userDB.getFollowing()){
+				if(uf.getID() == u.getID()){
+					following = true;
+					break;
+				}
+			}
+		}
+		return following;
 	}
 
 }

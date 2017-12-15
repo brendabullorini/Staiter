@@ -1,142 +1,43 @@
 package view;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.Part;
 
-import auth.AuthMb;
-import model.Image;
 import model.User;
-import controller.ImageController;
 import controller.UserController;
 
 @Named
-@MultipartConfig(location="/tmp",
-fileSizeThreshold=1024*1024, 
-maxFileSize=1024*1024*5,
-maxRequestSize=1024*1024*5*5)
-public class ProfileMb {
-	
-	@Inject
-	UserController userController;
-	
-	@Inject
-	ImageController imgController;
-	
-	@Inject
-	AuthMb authMb;
-	
-	private String newUsername;
-	private String oldPassword;
-	private String newPassword;
-	private String confirmPassword;
-	private Part file;
+public class ProfileMb implements Serializable {
 
-	private User user = new User();
+	private static final long serialVersionUID = 2914514327462218871L;
+
+	@Inject
+	UserController userCtrl;
 	
-	public String saveChanges(){
+	private int id;
+	
+	private User user;
+	
+	public void loadData(){
 		
-		boolean errorCarga = false;
-						
-		user.setID(authMb.getCurrentUser().getID());
-		user.setEmail(authMb.getCurrentUser().getEmail());
-		
-		if(oldPassword.length() > 0 && newPassword.length() > 0){
-			if(userController.verify(authMb.getCurrentUser().getEmail(), oldPassword) != null){
-				if(newPassword.equals(confirmPassword)){
-					user.setPassword(newPassword);
-				}else{					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"La nueva clave y su confirmacion no coinciden.", null);
-					FacesContext.getCurrentInstance().addMessage(null, msg);
-					errorCarga = true;
-				}
-			}else{		
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"La clave anterior es incorrecta.", null);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				errorCarga = true;
-			}
-		}else{			
-			user.setUserName(authMb.getCurrentUser().getPassword());
-		}
-		
-		if(newUsername.length() > 0){
-			if(!userController.usernameExists(newUsername)){				
-				user.setUserName(newUsername);
-			}else{				
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"El nombre de usuario ya existe.", null);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				errorCarga = true;
-			}
-		}else{
-			user.setUserName(authMb.getCurrentUser().getUserName());
-		}		
-		
-		if(file != null && file.getSize() > 0){
-			try{
-				Image img = null;
-				if(file.getContentType().startsWith("image/")){
-					img = imgController.upload(file);
-					user.setImage(img);
-				}
-			} catch (Exception e){
-				e.printStackTrace();
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"No se pudo cargar la foto, reintente.", null);
-				FacesContext.getCurrentInstance().addMessage(null, msg);
-				errorCarga = true;
-			}	
-		}else{
-			user.setImage(authMb.getCurrentUser().getImage());
-		}
-								
-		if(!errorCarga){
-			userController.update(user);
-			authMb.setCurrentUser(user);
-			return "index";
-		}else{
-			return null;
-		}
-		
+		System.out.println("***************** LOAD DATA: " + id);			
+		user = userCtrl.getById(id);
+		if(user==null)
+			System.out.println("************ USUARIO OBTENIDO NULL");
 	}
-	
-	public String cancelChanges(){
-		return "index";
+
+	public int getId() {
+		System.out.println("****************** GETER DE PROFILEMB: " + id);
+		return id;
+	}
+
+	public void setId(int id) {
+		System.out.println("*******************SETER DE PROFILEMB: " + id);
+		this.id = id;
 	}	
-	
-	public String getNewUsername() {
-		return newUsername;
-	}
 
-	public void setNewUsername(String newUsername) {
-		this.newUsername = newUsername;
-	}
-
-	public String getOldPassword() {
-		return oldPassword;
-	}
-	
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
-
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-	
 	public User getUser() {
 		return user;
 	}
@@ -144,14 +45,5 @@ public class ProfileMb {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	public Part getFile(){
-		return file;
-	}
-	
-	public void setFile(Part file){
-		this.file = file;
-	}
-	
 
 }

@@ -34,13 +34,13 @@
 	                    <div class="form-group">
 	                        <div class="col-xs-12">
 	                            <label for="profile-email">Nombre de usuario</label>
-	                            <h:inputText value="#{profileMb.newUsername}" styleClass="form-control input-lg" type="text" id="profile-email" name="profile-email"></h:inputText>                            
+	                            <h:inputText value="#{editProfileMb.newUsername}" styleClass="form-control input-lg" type="text" id="profile-email" name="profile-email"></h:inputText>                            
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
                             <label class="col-xs-12" for="example-file-input">Foto de perfil</label>
                             <div class="col-xs-12">
-                                <h:inputFile id="file" value="#{profileMb.file}" name="example-file-input"/>
+                                <h:inputFile id="file" value="#{editProfileMb.file}" name="example-file-input"/>
                             </div>
                         </div>
 	                </div>
@@ -50,29 +50,29 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="profile-password">Clave actual</label>                                
-                                <h:inputSecret value="#{profileMb.oldPassword}" styleClass="form-control input-lg" id="profile-password" name="profile-password"></h:inputSecret>                                                             
+                                <h:inputSecret value="#{editProfileMb.oldPassword}" styleClass="form-control input-lg" id="profile-password" name="profile-password"></h:inputSecret>                                                             
                             </div>
                         </div>
                         <hr></hr>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="profile-password-new">Nueva clave</label>                                
-                                <h:inputSecret value="#{profileMb.newPassword}" styleClass="form-control input-lg" id="profile-password-new" name="profile-password-new"></h:inputSecret>                                
+                                <h:inputSecret value="#{editProfileMb.newPassword}" styleClass="form-control input-lg" id="profile-password-new" name="profile-password-new"></h:inputSecret>                                
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="profile-password-new-confirm">Confirme nueva clave</label>                                
-                                <h:inputSecret value="#{profileMb.confirmPassword}" styleClass="form-control input-lg" id="profile-password-new-confirm" name="profile-password-new-confirm"></h:inputSecret>                                 
+                                <h:inputSecret value="#{editProfileMb.confirmPassword}" styleClass="form-control input-lg" id="profile-password-new-confirm" name="profile-password-new-confirm"></h:inputSecret>                                 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>            
             <div class="block-content block-content-full bg-gray-lighter text-center">                
-            	<h:commandLink action="#{profileMb.saveChanges()}" styleClass="btn btn-primary"><i class="fa fa-check push-5-r"></i>Guardar
+            	<h:commandLink action="#{editProfileMb.saveChanges()}" styleClass="btn btn-primary"><i class="fa fa-check push-5-r"></i>Guardar
 				</h:commandLink>
-				<h:commandLink action="#{profileMb.cancelChanges()}" styleClass="btn btn-sm btn-warning"><i class="fa fa-refresh push-5-r"></i>Cancelar
+				<h:commandLink action="#{editProfileMb.cancelChanges()}" styleClass="btn btn-sm btn-warning"><i class="fa fa-refresh push-5-r"></i>Cancelar
 				</h:commandLink>
             </div>
         </h:panelGroup>

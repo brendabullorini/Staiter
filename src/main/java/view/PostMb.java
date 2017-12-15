@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import auth.AuthMb;
 import model.Image;
 import model.Post;
+import model.User;
 import controller.ImageController;
 import controller.PostController;
 
@@ -24,12 +25,14 @@ maxRequestSize=1024*1024*5*5)
 public class PostMb{
 
 	@Inject
-	PostController postController;
+	PostController postController;	
 	
 	@Inject 
 	private ImageController imgCntl;
 	
 	private Part file;
+	
+	private User userSelected;
 	
 	@Inject
 	AuthMb authMb;
@@ -58,12 +61,20 @@ public class PostMb{
 		}
 	}
 	
+	public List<Post> getPostsByFollowing(){
+		return postController.getByFollowing(authMb.getCurrentUser());
+	}
+	
 	public List<Post> getPosts(){
 		return postController.getAll();		
 	}
 	
 	public List<Post> getPostsByUser(){
 		return postController.getByUser(authMb.getCurrentUser().getID());
+	}
+	
+	public List<Post> getPostsByUserSelected(){
+		return postController.getByUser(userSelected.getID());
 	}
 
 	public String getContent() {
@@ -80,6 +91,14 @@ public class PostMb{
 	
 	public void setFile(Part file){
 		this.file = file;
+	}
+
+	public User getUserSelected() {
+		return userSelected;
+	}
+
+	public void setUserSelected(User userSelected) {
+		this.userSelected = userSelected;
 	}
 	
 }

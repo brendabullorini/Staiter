@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:composition template="template.xhtml">
+	<ui:define name="title">
+		Bienvenido al nuevo Staiter
+	</ui:define>
+	<ui:define name="content" styleClass="content content-boxed">	
+		<h:panelGroup layout="block" styleClass="row">
+			<div class="col-lg-10 col-lg-offset-1">	  
+	   			<h:form id="addPostForm" enctype="multipart/form-data">	
+		   			<h:panelGroup layout="block" styleClass="block">		
+		   				<h:panelGroup layout="block" styleClass="block-content block-content-full">
+							<h:panelGroup layout="block" rendered="#{!authMb.logged}">
+								<h:outputText value="Inicia sesion para agregar nuevos posts." />
+							</h:panelGroup>
+							<h:panelGroup layout="block" rendered="#{authMb.logged}">
+								<h:panelGroup layout="block" styleClass="form-group">
+				                     <h:panelGroup>
+				                         <h:panelGroup layout="block" styleClass="form-material floating">
+				                             <h:inputText styleClass="form-control" value="#{postMb.content}" id="postContent"/>
+				                             <h:message for="postContent"></h:message>
+				                             <label for="postContent">¡Agrega un nuevo post!</label>
+				                         </h:panelGroup>
+				                     </h:panelGroup>
+				                </h:panelGroup>
+				                <h:panelGroup layout="block" styleClass="form-group">
+				                       <label class="col-xs-12" for="example-file-input">Subir una imagen</label>
+				                       <h:panelGroup>
+				                       	<h:inputFile id="file" value="#{postMb.file}"/>
+				                       	<h:message for="file"></h:message>
+				                       </h:panelGroup>
+				                </h:panelGroup>
+			                    <h:panelGroup layout="block" styleClass="form-group">
+				                    <h:panelGroup>
+						               	<h:commandLink action="#{postMb.add()}" styleClass="btn btn-sm btn-primary">Enviar
+										</h:commandLink>
+				                    </h:panelGroup>
+			                    </h:panelGroup>	 	
+							</h:panelGroup>	
+						</h:panelGroup>	
+					</h:panelGroup>		
+				</h:form>
+				<h:panelGroup layout="block" id="postList">
+					<ui:repeat var="p" value="#{postMb.postsByFollowing}">
+					    <h:panelGroup layout="block" id="post" styleClass="block">
+						    <h:form id="commentForm">
+						    	<h:panelGroup layout="block" styleClass="block-header" id="follow">
+							    	<ui:fragment rendered="#{authMb.logged and p.user!=authMb.currentUser}">							    	
+						    	    <ul class="block-options">						    	    
+                                        <li class="dropdown">
+                                            <button type="button" data-toggle="dropdown">
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-right font-s13">
+                                                <li>
+	                                                <h:commandLink tabindex="-1" action="#{socialMb.follow(p.user)}">
+	                                                    <i class="fa fa-thumbs-up text-success push-5-r"></i>
+                                                        <h:outputText value="#{socialMb.alreadyFollowed(p.user) ? 'Dejar de seguir' : 'Seguir usuario'}"/>
+                                                        <f:ajax render="follow"></f:ajax>
+	                                                </h:commandLink>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    </ui:fragment>
+				                    <h:panelGroup layout="block" styleClass="clearfix">
+					                    <h:panelGroup layout="block" styleClass="pull-left push-15-r">
+						                	<h:graphicImage rendered="#{p.user.hasProfileImage()}" styleClass="img-avatar img-avatar48" value="/image/#{p.user.image.path}"/>			                    			                            
+				                        </h:panelGroup>
+				                        <h:panelGroup layout="block" styleClass="push-5-t">
+				                            <a class="font-w600" href="javascript:void(0)"><h:outputText value="#{p.user.userName}" /></a><br/>
+				                            <span class="font-s12 text-muted">
+				                            	<h:outputText value="#{p.date}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+												</h:outputText>
+											</span>
+				                        </h:panelGroup>
+				                    </h:panelGroup>					    	
+						    	</h:panelGroup>
+				                <h:panelGroup layout="block" styleClass="block-content block-content-full">
+				                    <p class="push-10 pull-t"><h:outputText value="#{p.content}" /></p>
+				                    <h:graphicImage rendered="#{p.hasImage()}" class="img-responsive" value="/image/#{p.image.path}"/>
+				                    <hr/>
+				                    <h:panelGroup id="social" layout="block" styleClass="row text-center font-s13" rendered="#{authMb.logged}">
+				                        <h:panelGroup layout="block" styleClass="col-xs-3">
+					                        <h:commandLink styleClass="font-w600 text-gray-dark" action="#{socialMb.like(p)}">
+				                        		<i class="fa fa-thumbs-up push-5-r"></i>
+				                        		<h:panelGroup styleClass="hidden-xs #{authMb.logged and socialMb.existsLike(p) ? 'text-primary' : 'text-primary-dark'}">
+				                        			Me encanta (<h:outputText value="#{socialMb.countLikes(p)}"/>)
+				                        		</h:panelGroup>
+				                                <f:ajax render="social"></f:ajax>
+					                        </h:commandLink>
+				                        </h:panelGroup>
+				                	</h:panelGroup>
+				                </h:panelGroup>	
+				                <h:panelGroup layout="block" styleClass="block-content block-content-full bg-gray-lighter" id="commentList">
+				                    <!-- Comments -->
+				                    <ui:repeat id="rep_comments" var="c" value="#{commentMb.listByPost(p)}">
+				                    	<h:panelGroup layout="block" styleClass="media push-15">
+					                        <h:panelGroup layout="block" styleClass="media-left">
+					                            <a href="javascript:void(0)">
+					                                <h:graphicImage rendered="#{c.user.hasProfileImage()}" styleClass="img-avatar img-avatar32" value="/image/#{c.user.image.path}"/>
+					                                <h:graphicImage rendered="#{!c.user.hasProfileImage()}" styleClass="img-avatar img-avatar32" src="resources/img/avatars/avatar3.jpg"/>
+					                            </a>
+					                        </h:panelGroup>
+					                        <h:panelGroup layout="block" styleClass="media-body font-s13">
+					                            <a class="font-w600" href="javascript:void(0)">
+				                            		<h:outputText value="#{c.user.userName}" />
+				                            		<small>
+														<h:outputText value="#{c.date}" >
+															<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+														</h:outputText>
+													</small>
+												</a>
+					                            <h:panelGroup layout="block" styleClass="push-5"><h:outputText value="#{c.content}" /></h:panelGroup>
+					                        </h:panelGroup>
+					                    </h:panelGroup>
+				                    </ui:repeat>
+				                    <!-- END Comments -->				
+				                    <!-- Post Comment -->				                    
+				                    <h:panelGroup styleClass="form-horizontal" layout="block" rendered="#{authMb.logged}">
+					                    <h:panelGroup styleClass="form-group" layout="block">
+					                    	<h:inputText id="comentario-nuevo" value="#{commentMb.comment}" name="comentario-nuevo" styleClass="form-control" pt:placeholder="Agregar un comentario.."/>
+					                    	<h:message for="comentario-nuevo"></h:message>
+					                    </h:panelGroup>
+					                    <h:panelGroup styleClass="form-group" layout="block">
+						                    <h:commandLink action="#{commentMb.create(p)}" styleClass="btn btn-primary">Comentar
+											<f:ajax render="commentList" execute="@form"></f:ajax>
+											</h:commandLink>
+										</h:panelGroup>
+				                    </h:panelGroup>
+				                    <!-- END Post Comment -->
+				                </h:panelGroup>				                					    	
+						    </h:form>
+	                    </h:panelGroup>
+					</ui:repeat>
+				</h:panelGroup>
+			</div>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+</html>

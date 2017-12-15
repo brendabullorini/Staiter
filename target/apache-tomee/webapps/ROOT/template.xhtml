@@ -3,7 +3,7 @@
 <html xmlns:ui="http://java.sun.com/jsf/facelets" 
 xmlns:f="http://java.sun.com/jsf/core" 
 xmlns:h="http://java.sun.com/jsf/html">
-	 
+<ui:insert name="metadata"/>	 
 <h:head>
 	<ui:include src="style.xhtml"/>
 </h:head>
@@ -26,11 +26,11 @@ xmlns:h="http://java.sun.com/jsf/html">
 							   <h:outputLink value="newindex.xhtml" class="active"><i class="si si-bubbles"></i><span class="sidebar-mini-hide">Ver todo</span></h:outputLink>
 						   </li>
 						   <ui:fragment rendered="#{authMb.logged}">	
-						   <li>
+						   <li>						   
 						   	   <h:outputLink value="myposts.xhtml"><i class="si si-emoticon-smile"></i><span class="sidebar-mini-hide">Mis posts</span></h:outputLink>						   							   
 						   </li>
-						   <li>
-						   	   <h:outputLink value="newindex.xhtml"><i class="si si-heart"></i><span class="sidebar-mini-hide">Siguiendo</span></h:outputLink>							   
+						   <li>					   
+						   	   <h:outputLink value="newfollowing.xhtml"><i class="si si-heart"></i><span class="sidebar-mini-hide">Siguiendo</span></h:outputLink>							   
 						   </li>
 						   <li>							   
 							   <h:outputLink value="newindex.xhtml"><i class="si si-eye"></i><span class="sidebar-mini-hide">Quien me sigue</span></h:outputLink>
@@ -75,10 +75,12 @@ xmlns:h="http://java.sun.com/jsf/html">
 							</li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Acciones</li>
-							<li>								
+							<li>	
+								<h:form>							
 								<h:commandLink tabindex="-1" action="#{loginMb.logout()}">
 									<i class="si si-logout pull-right"></i>Salir
 								</h:commandLink>
+								</h:form>
 							</li>
 						</ul>
 					</div>
@@ -117,7 +119,8 @@ xmlns:h="http://java.sun.com/jsf/html">
 		</header>		
 		<main id="main-container">
 			<h:panelGroup layout="block" styleClass="content">
-			<h:messages id="mensajes" globalOnly="true" errorClass="alert alert-danger"/>		
+			<h:messages id="mensajes" globalOnly="true" errorClass="alert alert-danger"/>	
+
 				<ui:insert name="content">
 					<span>Pagina en construccion</span>
 				</ui:insert>			

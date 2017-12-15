@@ -13,5 +13,6 @@ model\Image.class
 view\PostMb.class
 view\CommentMb.class
 view\SocialMb.class
+view\EditProfileMb.class
 model\Comment.class
 model\User.class

@@ -1,11 +1,13 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,7 +19,10 @@ import model.User;
 public class PostController {
 	
     @PersistenceContext
-    private EntityManager entityManager;	
+    private EntityManager entityManager;
+    
+    @Inject
+    UserController userController;
 	
 	public List<Post> getAll(){		
     	String hql = "Select p from Post p order by p.ID desc";
@@ -26,7 +31,6 @@ public class PostController {
 	}
 	
 	public List<Post> getByUser(int ID){		
-		System.out.println("ID en controller: " + String.valueOf(ID));
     	String hql = "Select p from Post p where p.user.ID = :user order by p.ID desc";
 		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
 		q.setParameter("user", ID);
@@ -36,6 +40,20 @@ public class PostController {
 	public void createPost(Post p){
 		p.setDate(new Date());
 		entityManager.persist(p);
+	}
+	
+	public List<Post> getByFollowing(User u){
+		List<Post> posts = new ArrayList<Post>();
+		Set<User> following = userController.getFollowing(u);
+		for(User f : following){
+			List<Post> temp = getByUser(f.getID());
+			if(temp!=null){
+				for(Post p : temp){
+					posts.add(p);
+				}	
+			}
+		}
+		return posts;
 	}
 	
 	public void addLike(Post p, User u){

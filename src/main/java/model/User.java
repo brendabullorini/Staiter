@@ -52,7 +52,7 @@ public class User {
      joinColumns=@JoinColumn(name="user_id"),
      inverseJoinColumns=@JoinColumn(name="follow_id")
     )
-    private Set<User> follows = new HashSet<>();
+    private Set<User> following = new HashSet<>();
     
     public User(){
     	
@@ -66,12 +66,12 @@ public class User {
 		this.followers = followers;
 	}
 
-	public Set<User> getFollows() {
-		return follows;
+	public Set<User> getFollowing() {
+		return following;
 	}
 
-	public void setFollows(Set<User> follows) {
-		this.follows = follows;
+	public void setFollowing(Set<User> following) {
+		this.following = following;
 	}
 
 	public Set<Post> getPostsLikes() {
@@ -146,13 +146,13 @@ public class User {
 	}
 	
 	public void addFollow(User user){
-		this.follows.add(user);
-		user.getFollows().add(this);
+		this.following.add(user);
+		user.getFollowing().add(this);
 	}
 	
 	public void removeFollow(User user){
-		this.follows.remove(user);
-		user.getFollows().remove(this);
+		this.following.remove(user);
+		user.getFollowing().remove(this);
 	}
 	
    @Override
@@ -173,7 +173,7 @@ public class User {
 		return "User [ID=" + ID + ", email=" + email + ", userName=" + userName
 				+ ", password=" + password
 				+ ", followers=" + followers
-				+ ", follows=" + follows + "]";
+				+ ", follows=" + following + "]";
 	}
     
     

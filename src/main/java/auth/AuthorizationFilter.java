@@ -27,6 +27,7 @@ public class AuthorizationFilter implements Filter {
 					"/register.xhtml",
 					"/login.xhtml",
 					"/newindex.xhtml",
+					"/profile.xhtml*",
 					".*\\.js.xhtml",
 					".*\\.css.xhtml");
 
