@@ -22,7 +22,7 @@ public class ProfileMb implements Serializable {
 	
 	public void loadData(){
 		
-		System.out.println("***************** LOAD DATA: " + id);			
+		System.out.println("****************** LOAD DATA: " + id);			
 		user = userCtrl.getById(id);
 		if(user==null)
 			System.out.println("************ USUARIO OBTENIDO NULL");
