@@ -2,6 +2,7 @@ package view;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -9,6 +10,7 @@ import model.User;
 import controller.UserController;
 
 @Named
+@ViewScoped
 public class ProfileMb implements Serializable {
 
 	private static final long serialVersionUID = 2914514327462218871L;

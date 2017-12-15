@@ -34,7 +34,7 @@ public class LoginMb implements Serializable{
 			if(authMb.isLogged()){
 				System.out.println("********** LOGUEADO ");
 				System.out.println(authMb.getCurrentUser().toString());
-				return "newindex?faces-redirect=true";
+				return "index?faces-redirect=true";
 			}else {				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
 				FacesContext.getCurrentInstance().addMessage(null, msg);
