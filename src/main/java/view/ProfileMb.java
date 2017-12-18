@@ -1,51 +1,98 @@
 package view;
 
-import java.io.Serializable;
+import java.util.List;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
+import auth.AuthMb;
+import model.Image;
+import model.Post;
 import model.User;
+import controller.PostController;
 import controller.UserController;
 
 @Named
-@ViewScoped
-public class ProfileMb implements Serializable {
+public class ProfileMb{
+		
+	HttpServletRequest origRequest = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	private String id = origRequest.getParameter("id");
 
-	private static final long serialVersionUID = 2914514327462218871L;
-
+	@Inject
+	PostController postCtrl;
+	
 	@Inject
 	UserController userCtrl;
 	
-	private int id;
+	@Inject
+	private AuthMb authMb;
 	
-	private User user;
-	
-	public void loadData(){
-		
-		System.out.println("****************** LOAD DATA: " + id);			
-		user = userCtrl.getById(id);
-		if(user==null)
-			System.out.println("************ USUARIO OBTENIDO NULL");
-	}
-
-	public int getId() {
-		System.out.println("****************** GETER DE PROFILEMB: " + id);
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		System.out.println("*******************SETER DE PROFILEMB: " + id);
+	public void setId(String id) {
 		this.id = id;
-	}	
-
-	public User getUser() {
-		return user;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
+	
+	public List<Post> getPosts(){		
+		if(id==null){
+			return null;
+		}else{
+			return postCtrl.getByUser(Integer.valueOf(id));
+		}			
+	}
+	
+	public String getUsername(){
+		return userCtrl.getUsernameById(Integer.valueOf(id));
+	}
+	
+	public String getEmail(){
+		return userCtrl.getEmailById(Integer.valueOf(id));
+	}
+	
+	public int countFollowers(){
+		return userCtrl.countFollowers(Integer.valueOf(id));
+	}
+	
+	public int countFollowing(){
+		return userCtrl.countFollowing(Integer.valueOf(id));
+	}
+	
+	public int countPosts(){
+		return postCtrl.countPosts(Integer.valueOf(id));
+	}
+	
+	public Image getImage(){
+		return userCtrl.getImageById(Integer.valueOf(id));
+	}
+	
+	public boolean validParameter(){
+		if(id==null){
+			return false;
+		}else{
+			try{
+				Integer.valueOf(id);
+				if(userCtrl.existsById(Integer.valueOf(id))){
+					return true;
+				}else{
+					return false;
+				}
+			}catch (Exception e){
+				return false;
+			}
+		}
+	}
+	
+	public void follow(){
+		User user = userCtrl.getById(Integer.valueOf(id));
+		if(!userCtrl.alreadyFollowed(user, authMb.getCurrentUser())){
+			userCtrl.addFollow(user, authMb.getCurrentUser());
+		}else{
+			userCtrl.removeFollow(user, authMb.getCurrentUser());
+		}
 	}
 
 }

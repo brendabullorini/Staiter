@@ -16,6 +16,7 @@ import model.Post;
 import model.User;
 import controller.ImageController;
 import controller.PostController;
+import controller.UserController;
 
 @Named
 @MultipartConfig(location="/tmp",
@@ -25,14 +26,15 @@ maxRequestSize=1024*1024*5*5)
 public class PostMb{
 
 	@Inject
-	PostController postController;	
+	PostController postController;
+	
+	@Inject
+	UserController userController;
 	
 	@Inject 
 	private ImageController imgCntl;
 	
 	private Part file;
-	
-	private User userSelected;
 	
 	@Inject
 	AuthMb authMb;
@@ -73,8 +75,8 @@ public class PostMb{
 		return postController.getByUser(authMb.getCurrentUser().getID());
 	}
 	
-	public List<Post> getPostsByUserSelected(){
-		return postController.getByUser(userSelected.getID());
+	public List<Post> getPostsByUser(User user){
+		return postController.getByUser(user.getID());
 	}
 
 	public String getContent() {
@@ -92,13 +94,17 @@ public class PostMb{
 	public void setFile(Part file){
 		this.file = file;
 	}
-
-	public User getUserSelected() {
-		return userSelected;
+	
+	public int countFollowers(){
+		return userController.countFollowers(authMb.getCurrentUser().getID());
 	}
-
-	public void setUserSelected(User userSelected) {
-		this.userSelected = userSelected;
+	
+	public int countFollowing(){
+		return userController.countFollowing(authMb.getCurrentUser().getID());
+	}
+	
+	public int countPosts(){
+		return postController.countPosts(authMb.getCurrentUser().getID());
 	}
 	
 }

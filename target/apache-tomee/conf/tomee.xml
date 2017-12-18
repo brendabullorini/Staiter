@@ -2,7 +2,7 @@
 	<Resource id="StaiterDB" type="DataSource">
 	    JdbcDriver  com.mysql.jdbc.Driver
 	    JdbcUrl jdbc:mysql://localhost/staiterdb
-	    UserName    root
-	    Password    
+	    UserName    staiter
+	    Password    staiter
 	</Resource>
 </tomee>

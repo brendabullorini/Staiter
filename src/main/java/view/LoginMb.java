@@ -32,8 +32,6 @@ public class LoginMb implements Serializable{
 		if(username != null && password != null){
 			authMb.setCurrentUser(userController.verify(username, password));
 			if(authMb.isLogged()){
-				System.out.println("********** LOGUEADO ");
-				System.out.println(authMb.getCurrentUser().toString());
 				return "index?faces-redirect=true";
 			}else {				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", null);
@@ -48,7 +46,7 @@ public class LoginMb implements Serializable{
 	
 	public String logout(){
 		authMb.setCurrentUser(null);
-		return "newindex?faces-redirect=true";
+		return "index?faces-redirect=true";
 	}
 
 	public String getUsername() {

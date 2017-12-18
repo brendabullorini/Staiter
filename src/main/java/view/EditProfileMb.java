@@ -92,6 +92,8 @@ public class EditProfileMb {
 		}
 								
 		if(!errorCarga){
+			user.setFollowing(userController.getFollowing(user));
+			user.setFollowers(userController.getFollowers(user));
 			userController.update(user);
 			authMb.setCurrentUser(user);
 			return "index";

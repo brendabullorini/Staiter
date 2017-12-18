@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import model.Image;
 import model.User;
 
 @Stateless
@@ -29,7 +30,7 @@ public class UserController {
 		return created;
 	}
 	
-	public void update(User user){
+	public void update(User user){				
 		entityManager.merge(user);
 	}
 	
@@ -44,10 +45,7 @@ public class UserController {
 		}
 	}
 	
-	public boolean usernameExists(String username){
-		
-		//TODO cambiar los longs
-
+	public boolean usernameExists(String username){		
 		boolean exists = false;		
     	String hql = "Select count(u) from User u where u.userName = :user";       	
     	Long count = (Long) entityManager.createQuery(hql)
@@ -58,29 +56,17 @@ public class UserController {
 		return exists;
 	}
 		
-	public User verify(String email, String password){
+	public User verify(String email, String password){	
 		
-		User user = null;
-		User userDB = null;
-		
-		//TODO checkear por usuario y password, no solo usuario y despues password.
-		
-    	String hql = "Select u from User u where u.email = :user";
-		TypedQuery<User> q = entityManager.createQuery(hql,User.class);
-		q.setParameter("user", email);
-		
-		List<User> resultList = (List<User>) q.getResultList(); 
-		if (!(resultList.isEmpty())) {
-			userDB = resultList.get(0);
-		}
-		
-        if(userDB != null){
-        	if(userDB.getPassword().equals(password)){
-        		user = userDB;        	
-        	}
-        }
-		
-		return user;
+		try{
+			String jpql = "Select u from User u where u.email = :email and u.password = :password";
+			TypedQuery<User> q = entityManager.createQuery(jpql, User.class);
+			q.setParameter("email", email);
+			q.setParameter("password", password);
+			return q.getSingleResult();
+		} catch (PersistenceException e){
+			return null;
+		}				
 	}
 	
 	public boolean changePassword(String email, String newPassword){
@@ -113,16 +99,12 @@ public class UserController {
 	
 	public boolean userExists(String email){
 		
-		boolean exists = false;
-		
-    	String hql = "Select count(u) from User u where u.email = :user";
-       	
+		boolean exists = false;		
+    	String hql = "Select count(u) from User u where u.email = :user";       	
     	Long count = (Long) entityManager.createQuery(hql)
-    		       .setParameter("user", email).getSingleResult();
-    	 	
-    	if(count > 0){
-    		exists = true;
-    	}        
+    		       .setParameter("user", email).getSingleResult();    	 	
+    	if(count > 0)
+    		exists = true;    	
 		
 		return exists;
 	}
@@ -153,11 +135,12 @@ public class UserController {
 	
 	public void removeFollow(User followed, User user){
 		Set<User> following = getFollowing(user);
-		if(following==null)
+		if(following==null){
 			following = new HashSet<User>();
+		}			
 		following.remove(followed);
 		user.setFollowing(following);
-		entityManager.merge(user);				
+		entityManager.merge(user);			
 	}
 	
 	public Set<User> getFollowing(User u){
@@ -169,18 +152,89 @@ public class UserController {
 		}
 	}
 	
+	public int countFollowing(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB.getFollowing()!=null){
+			return userDB.getFollowing().size();
+		}else{
+			return 0;
+		}
+	}
+	
+	public Set<User> getFollowers(User u){
+		User userDB = entityManager.find(User.class, u.getID());
+		if(userDB.getFollowers()!=null){
+			return userDB.getFollowers();
+		}else{
+			return null;
+		}
+	}
+	
+	public int countFollowers(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB.getFollowers()!=null){
+			return userDB.getFollowers().size();
+		}else{
+			return 0;
+		}
+	}
+	
 	public boolean isFollowingMe(User f, User u){
 		boolean following = false;
 		User userDB = entityManager.find(User.class, f.getID());
-		if(userDB.getFollowing()!=null){
-			for(User uf : userDB.getFollowing()){
-				if(uf.getID() == u.getID()){
-					following = true;
-					break;
+		if(userDB!=null){
+			if(userDB.getFollowing()!=null){
+				for(User uf : userDB.getFollowing()){
+					if(uf.getID() == u.getID()){
+						following = true;
+						break;
+					}
 				}
-			}
+			}	
 		}
 		return following;
+	}
+	
+	public String getUsernameById(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB!=null){
+			return userDB.getUserName();			
+		}else{
+			return null;
+		}
+	}
+	
+	public Image getImageById(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB!=null){
+			return userDB.getImage();			
+		}else{
+			return null;
+		}
+	}
+	
+	public String getEmailById(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB!=null){
+			return userDB.getEmail();			
+		}else{
+			return null;
+		}
+	}
+	
+	public boolean existsById(int id){
+		User userDB = entityManager.find(User.class, id);
+		if(userDB!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public List<User> findUsers(String search){
+    	String hql = "Select u from User u where u.email LIKE '%" + search + "%' or u.userName LIKE '%" + search + "%'";
+		TypedQuery<User> q = entityManager.createQuery(hql,User.class);		
+        return q.getResultList();
 	}
 
 }

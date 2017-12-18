@@ -34,7 +34,15 @@ public class PostController {
     	String hql = "Select p from Post p where p.user.ID = :user order by p.ID desc";
 		TypedQuery<Post> q = entityManager.createQuery(hql,Post.class);
 		q.setParameter("user", ID);
-        return q.getResultList();
+		try{
+			List<Post> posts = q.getResultList();
+			return posts;
+		}catch(Exception e){
+			System.out.println("**********EXCEPTION EN GETBYUSER " + e.getMessage());
+			return null;
+		}
+		
+        
 	}	
 	
 	public void createPost(Post p){
@@ -81,6 +89,13 @@ public class PostController {
 		if(postDB.getUsersLikes()!=null)
 			cantidad=postDB.getUsersLikes().size();
 		return cantidad;
+	}
+	
+	public int countPosts(int id){
+		String hql = "Select count(p) from Post p where p.user.ID = :user";
+    	Long count = (Long) entityManager.createQuery(hql)
+ 		       .setParameter("user", id).getSingleResult();
+    	return count.intValue();
 	}
 	
 	private Set<User> getLikes(Post p){

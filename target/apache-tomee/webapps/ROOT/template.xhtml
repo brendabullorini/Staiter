@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html >	 
+<!DOCTYPE html>	 
 <html xmlns:ui="http://java.sun.com/jsf/facelets" 
 xmlns:f="http://java.sun.com/jsf/core" 
 xmlns:h="http://java.sun.com/jsf/html">
-<ui:insert name="metadata"/>	 
 <h:head>
 	<ui:include src="style.xhtml"/>
 </h:head>
@@ -22,26 +21,33 @@ xmlns:h="http://java.sun.com/jsf/html">
 				   </div>
 				   <div class="side-content side-content-full">
 					   <ul class="nav-main">
+					   	   <li class="nav-main-heading"><span class="sidebar-mini-hide"><h:outputText>#{authMb.currentUser.userName}</h:outputText></span></li>
 						   <li>							   
-							   <h:outputLink value="newindex.xhtml" class="active"><i class="si si-bubbles"></i><span class="sidebar-mini-hide">Ver todo</span></h:outputLink>
+							   <h:outputLink value="index.xhtml" class="active"><i class="si si-bubbles"></i><span class="sidebar-mini-hide">Ver todo</span></h:outputLink>
 						   </li>
-						   <ui:fragment rendered="#{authMb.logged}">	
+						   <h:panelGroup rendered="#{authMb.logged}">	
 						   <li>						   
-						   	   <h:outputLink value="myposts.xhtml"><i class="si si-emoticon-smile"></i><span class="sidebar-mini-hide">Mis posts</span></h:outputLink>						   							   
+						   	   <h:outputLink value="myprofile.xhtml"><i class="si si-emoticon-smile"></i><span class="sidebar-mini-hide">Mis posts</span></h:outputLink>						   							   
 						   </li>
 						   <li>					   
 						   	   <h:outputLink value="following.xhtml"><i class="si si-heart"></i><span class="sidebar-mini-hide">Siguiendo</span></h:outputLink>							   
 						   </li>
 						   <li>							   
-							   <h:outputLink value="index.xhtml"><i class="si si-eye"></i><span class="sidebar-mini-hide">Quien me sigue</span></h:outputLink>
+							   <h:outputLink value="followers.xhtml"><i class="si si-eye"></i><span class="sidebar-mini-hide">Quien me sigue</span></h:outputLink>
+						   </li>
+						   <li>							   
+							   <h:outputLink value="search.xhtml"><i class="si si-magnifier"></i><span class="sidebar-mini-hide">Buscar</span></h:outputLink>
 						   </li>
 						   <li>	
-						   	   <h:form>						   
+						   <h:form>				   
 							   <h:commandLink action="#{loginMb.logout()}"><i class="si si-logout"></i><span class="sidebar-mini-hide">Salir</span></h:commandLink>
-							   </h:form>
+						   </h:form>							   
 						   </li>
-						   </ui:fragment>						   
-						   <ui:fragment rendered="#{!authMb.logged}">	
+						   </h:panelGroup>						   
+						   <h:panelGroup rendered="#{!authMb.logged}">	
+						   <li>							   
+							   <h:outputLink value="search.xhtml"><i class="si si-magnifier"></i><span class="sidebar-mini-hide">Buscar</span></h:outputLink>
+						   </li>
 						   <li>							   
 							   <h:outputLink value="login.xhtml"><i class="si si-login"></i><span class="sidebar-mini-hide">Iniciar sesion</span></h:outputLink>
 						   </li>
@@ -51,14 +57,14 @@ xmlns:h="http://java.sun.com/jsf/html">
 						   <li>							   
 							   <h:outputLink value="index.xhtml"><i class="si si-info"></i><span class="sidebar-mini-hide">Contacto</span></h:outputLink>
 						   </li>
-						   </ui:fragment>                                 
+						   </h:panelGroup>                                 
 					   </ul>
 				   </div>
 			   </div>
 		   </div>
 		  </nav>
 		<header id="header-navbar" class="content-mini content-mini-full">
-			<ui:fragment rendered="#{authMb.logged}">			
+			<h:panelGroup>			
 			<ul class="nav-header pull-right">
 				<li>
 					<div class="btn-group">
@@ -69,18 +75,18 @@ xmlns:h="http://java.sun.com/jsf/html">
 						<ul class="dropdown-menu dropdown-menu-right">
 							<li class="dropdown-header">Mi perfil</li>
 							<li>
-								<h:outputLink tabindex="-1" value="myprofile.xhtml">
+								<h:outputLink tabindex="-1" value="editprofile.xhtml">
 									<i class="si si-user pull-right"></i>Editar
 								</h:outputLink>
 							</li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Acciones</li>
-							<li>	
-								<h:form>							
+							<li>		
+							<h:form>												
 								<h:commandLink tabindex="-1" action="#{loginMb.logout()}">
 									<i class="si si-logout pull-right"></i>Salir
 								</h:commandLink>
-								</h:form>
+							</h:form>
 							</li>
 						</ul>
 					</div>
@@ -88,7 +94,7 @@ xmlns:h="http://java.sun.com/jsf/html">
 				<li>
 				</li>
 			</ul>
-			</ui:fragment>
+			</h:panelGroup>
 			<ul class="nav-header pull-left">
 				<li class="hidden-md hidden-lg">
 					<button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle" type="button">
@@ -102,25 +108,11 @@ xmlns:h="http://java.sun.com/jsf/html">
 				</li>
 				<li>
 				</li>
-				<li class="visible-xs">
-					<button class="btn btn-default" data-toggle="class-toggle" data-target=".js-header-search" data-class="header-search-xs-visible" type="button">
-						<i class="fa fa-search"></i>
-					</button>
-				</li>
-				<li class="js-header-search header-search">
-					<form class="form-horizontal" action="base_pages_search.html" method="post">
-						<div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-							<input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Buscar usuario..."/>
-							<span class="input-group-addon"><i class="si si-magnifier"></i></span>
-						</div>
-					</form>
-				</li>
 			</ul>
 		</header>		
 		<main id="main-container">
 			<h:panelGroup layout="block" styleClass="content">
 			<h:messages id="mensajes" globalOnly="true" errorClass="alert alert-danger"/>	
-
 				<ui:insert name="content">
 					<span>Pagina en construccion</span>
 				</ui:insert>			
@@ -129,4 +121,3 @@ xmlns:h="http://java.sun.com/jsf/html">
 	</div>
 </h:body>
 </html>
-

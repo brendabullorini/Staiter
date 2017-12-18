@@ -47,6 +47,14 @@ public class SocialMb {
 		}
 	}
 	
+	public void removeFollow(User user){
+		userCtrl.removeFollow(user, authMb.getCurrentUser());
+	}
+	
+	public void addFollow(User user){
+		userCtrl.addFollow(user, authMb.getCurrentUser());
+	}
+	
 	public boolean alreadyFollowed(User followed){
 		return userCtrl.alreadyFollowed(followed, authMb.getCurrentUser());		
 	}
@@ -55,7 +63,12 @@ public class SocialMb {
 		return userCtrl.getFollowing(authMb.getCurrentUser());
 	}
 	
+	public Set<User> getFollowers(){
+		return userCtrl.getFollowers(authMb.getCurrentUser());
+	}
+	
 	public boolean isFollowingMe(User following){
 		return userCtrl.isFollowingMe(following, authMb.getCurrentUser());
 	}
+		
 }
